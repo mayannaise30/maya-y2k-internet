@@ -427,11 +427,21 @@ input,textarea,select{font-size:14px;line-height:1.45}
 .music-create{margin:0}
 @media(max-width:600px){.wmp-screen{grid-template-columns:1fr}.wmp-feature-image{height:210px}.music-lower{grid-template-columns:1fr}.wmp-controlsbar{gap:6px}.wmp-volume{display:none}}
 
+
+/* Pixel Bird mini arcade */
+.pixel-game-window{border:3px ridge #b7cbe4;background:#dfe8f4;box-shadow:0 5px 0 #8da6c3;margin:12px 0;color:#18375f}
+.pixel-game-title{padding:8px 12px;background:linear-gradient(#5aa0ff,#0751c5 55%,#06419d);color:#fff;font-size:13px;font-weight:900;text-shadow:1px 1px #12356c;display:flex;justify-content:space-between}
+.pixel-game-screen{padding:8px;background:linear-gradient(#d8e8fb,#9cbbe0)}
+#birdCanvas{display:block;width:100%;height:auto;max-height:420px;border:3px ridge #fff;background:#a9c8ed;image-rendering:pixelated;touch-action:manipulation}
+.pixel-game-footer{display:flex;justify-content:space-between;gap:8px;padding:8px 11px;background:linear-gradient(#edf5ff,#c4d8ef);font:11px monospace;flex-wrap:wrap}
+.bird-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}
+.bird-actions button{background:linear-gradient(#fff,#c5dcf5 55%,#85a9d5);border:2px ridge #fff;color:#173b70}
+
 </style></head><body>
 <header><div class="brand">✦ MAYA'S MINI INTERNET ✦</div><div class="tiny">best viewed with a little sparkle · since whenever</div></header>
 <main>
 <section class="hero"><img class="image-sticker hero-left" src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=360&h=360&fit=crop" alt="blue ocean"><img class="image-sticker hero-right" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=360&h=360&fit=crop" alt="starry night sky"><span class="spark a">✧</span><span class="spark d">♡</span><h1>Maya</h1><p>personal notes, favorite things, music, memories & everything in between</p><button onclick="page('scrapbook')">read the scrapbook </button><button onclick="page('music')">visit the music journal </button></section>
-<nav><button onclick="page('home')">⌂ Home</button><button onclick="page('scrapbook')"> Scrapbook</button><button onclick="page('profile')">About me</button><button onclick="page('music')">Music</button><button onclick="page('tv')"> TV & Movies</button><button onclick="page('words')">Word wall</button><button onclick="page('studio')"> Studio</button><button onclick="page('universe')"> Universe</button><button onclick="page('games')"> Secrets</button></nav>
+<nav><button onclick="page('home')">⌂ Home</button><button onclick="page('scrapbook')"> Scrapbook</button><button onclick="page('profile')">About me</button><button onclick="page('music')">Music</button><button onclick="page('tv')"> TV & Movies</button><button onclick="page('words')">Word wall</button><button onclick="page('studio')"> Studio</button><button onclick="page('universe')"> Universe</button><button onclick="page('games')"> Mini game</button></nav>
 <section class="page active" id="home"><div class="layout"><div>
 <div class="panel"><h2>✦ welcome to my internet</h2><p>Your own little portal. Add pictures and notes, make playlists, collect words, and decorate your pages.</p><div class="grid">
 <div class="tile" onclick="page('scrapbook')"><span class="emoji"></span><strong>photo dumps</strong><small>memories & moments</small></div><div class="tile" onclick="page('music')"><span class="emoji"></span><strong>music corner</strong><small>albums & playlists</small></div><div class="tile" onclick="page('tv')"><span class="emoji"></span><strong>watch vault</strong><small>shows & movies</small></div><div class="tile" onclick="page('words')"><span class="emoji"></span><strong>rare words</strong><small>your word collection</small></div><div class="tile" onclick="page('studio')"><span class="emoji"></span><strong>creative studio</strong><small>make something</small></div><div class="tile" onclick="page('universe')"><span class="emoji"></span><strong>my universe</strong><small>little fictional worlds</small></div></div></div>
@@ -481,7 +491,18 @@ input,textarea,select{font-size:14px;line-height:1.45}
 <section class="page" id="words"><div class="panel"><h2>✧ rare words wall</h2><p>Only the words you personally chose.</p><div class="grid" id="wordGrid"></div></div></section>
 <section class="page" id="studio"><div class="panel"><h2> creative studio</h2><p>Make a little graphic using text and a color.</p><input id="graphicText" placeholder="your quote / phrase"><input type="color" id="graphicColor" value="#d7edff"><button onclick="graphic()">create graphic</button><div class="grid" id="graphics"></div><h3>sticker tray</h3><span class="sticker">✦ sparkle</span><span class="sticker"> butterfly</span><span class="sticker"> CD</span><span class="sticker">♡ heart</span><span class="sticker">✿ flower</span><span class="sticker"> cloud</span><span class="sticker">☆ star</span><span class="sticker">♫ music</span></div></section>
 <section class="page" id="universe"><div class="panel"><h2> my universe</h2><p>A place for fictional characters, alternate worlds, made-up lore, and ideas.</p><input id="worldName" placeholder="name this world"><textarea id="lore" placeholder="What is this world like? Who lives there?"></textarea><button onclick="worldAdd()">save world</button><div id="worlds"></div></div></section>
-<section class="page" id="games"><div class="panel"><h2> secret corner</h2><p>Little harmless surprises hidden around the site.</p><div class="grid"><div class="tile" onclick="star()"><span class="emoji"></span><strong>star collector</strong><small>tap to collect stars</small><b id="stars">0 stars</b></div><div class="tile" onclick="fortune()"><span class="emoji"></span><strong>tiny fortune</strong><small>get a random message</small></div><div class="tile" onclick="secret()"><span class="emoji">️</span><strong>secret button</strong><small>find a hidden note</small></div></div><p id="gameMsg" class="quote">Psst... there are secrets everywhere.</p></div></section>
+<section class="page" id="games">
+<div class="panel"><h2>✦ PIXEL BIRD</h2><p>A tiny arcade game for your mini internet. Tap, click, or press SPACE to flap and guide your bird through the gaps!</p>
+<div class="pixel-game-window">
+ <div class="pixel-game-title">✿ PIXEL BIRD.EXE <span>－　□　×</span></div>
+ <div class="pixel-game-screen"><canvas id="birdCanvas" width="640" height="360" aria-label="Pixel Bird game area"></canvas></div>
+ <div class="pixel-game-footer"><span id="birdStatus">READY TO PLAY</span><span>SCORE: <b id="birdScore">0</b>　 BEST: <b id="birdBest">0</b></span></div>
+</div>
+<div class="bird-actions"><button onclick="birdStart()">▶ START GAME</button><button onclick="birdFlap()">↑ FLAP</button><button onclick="birdReset()">↻ RESTART</button></div>
+<p class="muted">Tip: small taps work better than holding the button. On a computer, use SPACE or click the game.</p>
+</div>
+<div class="panel"><h2>♡ secret corner</h2><p>Little harmless surprises hidden around the site.</p><div class="grid"><div class="tile" onclick="star()"><strong>star collector</strong><small>tap to collect stars</small><b id="stars">0 stars</b></div><div class="tile" onclick="fortune()"><strong>tiny fortune</strong><small>get a random message</small></div><div class="tile" onclick="secret()"><strong>secret button</strong><small>find a hidden note</small></div></div><p id="gameMsg" class="quote">Psst... there are secrets everywhere.</p></div>
+</section>
 <footer>made of daydreams, pixels & icy blue glitter ✧<br><button onclick="backup()">export my data</button><button onclick="resetSite()">reset saved site data</button><p>Your edits are saved in this browser. Photos stay local to this browser/device.</p></footer>
 </main><div id="toast"></div>
 <script>
@@ -509,5 +530,35 @@ let p=D.profile||['','','',''];['pname','about','mood','listening'].forEach((id,
 document.getElementById('playlists').innerHTML=(D.playlists||[]).map(x=>`<div class="window"><h3> ${esc(x[0])}</h3><p>${esc(x[1])}</p><pre>${esc(x[2])}</pre></div>`).join('');document.getElementById('memories').innerHTML=(D.memories||[]).map(x=>`<div class="quote"><b>${esc(x[0])}</b><br>${esc(x[1])}</div>`).join('');
 document.getElementById('watchView').innerHTML=(D.watch||[]).map(x=>`<div class="window">${esc(x[0])} · ${esc(x[1])}</div>`).join('');document.getElementById('quotes').innerHTML=(D.quotes||[]).map(x=>`<div class="quote"><b>${esc(x[0])}</b><br>${esc(x[1])}</div>`).join('');
 document.getElementById('wordGrid').innerHTML=WORDS.map(x=>`<div class="word"><b>${x[0]}</b><div class="muted">${x[1]}</div></div>`).join('');document.getElementById('graphics').innerHTML=(D.graphics||[]).map(x=>`<div class="tile" style="background:${esc(x[1])};display:grid;place-items:center;font:20px Righteous">${esc(x[0])}</div>`).join('');document.getElementById('worlds').innerHTML=(D.worlds||[]).map(x=>`<div class="window"><h3>${esc(x[0])}</h3><p>${esc(x[1])}</p></div>`).join('');document.getElementById('stars').textContent=(D.stars||0)+' stars';
-}render();
+}
+/* Pixel Bird game logic */
+let birdGame={running:false,over:false,score:0,best:Number(localStorage.getItem('pixelBirdBest')||0),y:160,vy:0,pipes:[],frame:0,raf:0};
+function birdDraw(){
+ const c=document.getElementById('birdCanvas');if(!c)return;const x=c.getContext('2d'),w=c.width,h=c.height;
+ x.clearRect(0,0,w,h);
+ const sky=x.createLinearGradient(0,0,0,h);sky.addColorStop(0,'#b9d6f3');sky.addColorStop(1,'#eef4fb');x.fillStyle=sky;x.fillRect(0,0,w,h);
+ // pixel clouds
+ x.fillStyle='#f8fbff';[[70,55],[270,95],[500,45]].forEach(([a,b])=>{x.fillRect(a,b,42,12);x.fillRect(a+12,b-9,24,10);x.fillRect(a+7,b+12,34,6)});
+ // distant pixel hills
+ x.fillStyle='#9fb8d9';for(let i=0;i<w;i+=48){x.fillRect(i,300,48,60);x.fillRect(i+12,286,24,14)}
+ x.fillStyle='#c0cc69';x.fillRect(0,330,w,30);x.fillStyle='#8fa34b';for(let i=0;i<w;i+=18)x.fillRect(i,330,9,4);
+ birdGame.pipes.forEach(p=>{x.fillStyle='#7e9fbd';x.fillRect(p.x,0,48,p.top);x.fillRect(p.x-5,p.top-12,58,12);x.fillRect(p.x,p.bottom,48,h-p.bottom);x.fillRect(p.x-5,p.bottom,58,12);x.fillStyle='#dbe9f7';x.fillRect(p.x+8,0,7,p.top-12);x.fillRect(p.x+8,p.bottom+12,7,h-p.bottom-12)});
+ // pixel bird
+ const by=birdGame.y;x.fillStyle='#f0cf55';x.fillRect(105,by-10,24,20);x.fillRect(97,by-5,9,12);x.fillStyle='#fff';x.fillRect(121,by-7,8,8);x.fillStyle='#27384c';x.fillRect(125,by-5,3,4);x.fillStyle='#e58b65';x.fillRect(129,by+1,10,5);x.fillStyle='#dba83c';x.fillRect(108,by+9,8,5);
+ if(!birdGame.running){x.fillStyle='#1d3b61';x.textAlign='center';x.font='bold 23px Arial';x.fillText(birdGame.over?'GAME OVER':'PIXEL BIRD',w/2,145);x.font='bold 14px Arial';x.fillText(birdGame.over?'Press RESTART to try again':'Press START, SPACE, or tap to flap',w/2,174)}
+}
+function birdHud(){document.getElementById('birdScore').textContent=birdGame.score;document.getElementById('birdBest').textContent=birdGame.best;document.getElementById('birdStatus').textContent=birdGame.over?'GAME OVER':birdGame.running?'PLAYING':'READY TO PLAY'}
+function birdStart(){if(birdGame.running)return;birdReset();birdGame.running=true;birdHud();birdLoop()}
+function birdReset(){cancelAnimationFrame(birdGame.raf);birdGame.running=false;birdGame.over=false;birdGame.score=0;birdGame.y=160;birdGame.vy=0;birdGame.frame=0;birdGame.pipes=[{x:390,top:95,bottom:225,passed:false},{x:650,top:125,bottom:255,passed:false}];birdHud();birdDraw()}
+function birdFlap(){if(!birdGame.running){if(!birdGame.over)birdStart();else return}birdGame.vy=-4.8}
+function birdLoop(){
+ if(!birdGame.running)return;const w=640,h=360;birdGame.frame++;birdGame.vy+=.23;birdGame.y+=birdGame.vy;
+ birdGame.pipes.forEach(p=>{p.x-=2.4;if(!p.passed&&p.x+48<105){p.passed=true;birdGame.score++;birdHud()}if(p.x<-60){p.x=640;p.top=65+Math.random()*100;p.bottom=p.top+115+Math.random()*18;p.passed=false}});
+ const hit=birdGame.y<0||birdGame.y>326||birdGame.pipes.some(p=>105+24>p.x&&105<p.x+48&&(birdGame.y-10<p.top||birdGame.y+10>p.bottom));
+ if(hit){birdGame.running=false;birdGame.over=true;if(birdGame.score>birdGame.best){birdGame.best=birdGame.score;localStorage.setItem('pixelBirdBest',birdGame.best)}birdHud();birdDraw();return}
+ birdDraw();birdGame.raf=requestAnimationFrame(birdLoop);
+}
+document.addEventListener('keydown',e=>{if(e.code==='Space'&&document.getElementById('games')?.classList.contains('active')){e.preventDefault();birdFlap()}});
+document.addEventListener('DOMContentLoaded',()=>{const c=document.getElementById('birdCanvas');if(c){c.addEventListener('pointerdown',e=>{e.preventDefault();birdFlap()});birdReset()}});
+render();
 </script></body></html>
