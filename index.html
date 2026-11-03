@@ -367,6 +367,30 @@ input,textarea,select{background:#fff;border-color:#a5afb5;color:#292d30}
 footer{background:#d7d8d3;border-color:#6f7474;color:#353a3d}
 #toast{background:#f7f6f1;border-color:var(--retro-charcoal);color:var(--retro-charcoal)}
 
+
+/* READABILITY PASS: keep the retro layout, use clear everyday typography */
+body, p, label, small, .muted, .tiny, input, textarea, select, footer,
+.panel, .tile, .window, .sticker, .word, #toast, pre {
+  font-family: Nunito, Arial, sans-serif !important;
+  line-height: 1.55;
+}
+.brand, h1, .panel h2, .panel h3, .tile strong, .quote,
+nav button, button {
+  font-family: Nunito, Arial, sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: .2px !important;
+}
+.brand{font-size:20px}
+h1{font-size:clamp(42px,8vw,72px);letter-spacing:1px!important}
+.panel h2{font-size:20px;line-height:1.3}
+.panel h3{font-size:14px;line-height:1.35}
+nav button,button{font-size:12px;line-height:1.35}
+.tile strong{font-size:14px;line-height:1.35}
+.tile small,.tiny,.muted{font-size:12px;line-height:1.45}
+.quote{font-size:15px;line-height:1.5;font-weight:700!important}
+p{font-size:14px;line-height:1.6}
+input,textarea,select{font-size:14px;line-height:1.45}
+
 </style></head><body>
 <header><div class="brand">✦ MAYA'S MINI INTERNET ✦</div><div class="tiny">best viewed with a little sparkle · since whenever</div></header>
 <main>
