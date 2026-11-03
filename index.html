@@ -697,7 +697,7 @@ if(document.getElementById('pongCanvas'))pongDraw();
 const c8Suits=['♠','♥','♦','♣'],c8Ranks=['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
 let c8={deck:[],hand:[],cpu:[],top:null,suit:'',turn:'you',started:false,over:false,choosing:false};
 function c8Shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a}
-function c8New(){let d=c8Shuffle(c8Suits.flatMap(s=>c8Ranks.map(r=>({s,r}))));c8={deck:d,hand:[],cpu:[],top:null,suit:'',turn:'you',started:true,over:false,choosing:false};for(let i=0;i<7;i++){c8.hand.push(c8.deck.pop());c8.cpu.push(c8.deck.pop())}c8.top=c8.deck.pop();while(c8.top.r==='8'&&c8.deck.length)c8.deck.unshift(c8.top),c8.top=c8.deck.pop();c8.suit=c8.top.s;c8Render();c8Say('Your turn! Match the suit or number. Eights can be played anytime.')}
+function c8New(){let d=c8Shuffle(c8Suits.flatMap(s=>c8Ranks.map(r=>({s,r}))));c8={deck:d,hand:[],cpu:[],top:null,suit:'',turn:'you',started:true,over:false,choosing:false};c8DiscardStack=[];for(let i=0;i<7;i++){c8.hand.push(c8.deck.pop());c8.cpu.push(c8.deck.pop())}c8.top=c8.deck.pop();c8.suit=c8.top.r==='8'?c8Suits[Math.random()*4|0]:c8.top.s;c8Render();c8Say('Your turn! Match the suit or number. Eights can be played anytime.')}
 function c8Playable(card){return card.r==='8'||card.s===c8.suit||card.r===c8.top.r}
 function c8Red(s){return s==='♥'||s==='♦'}
 function c8CardHTML(card,back=false){return '<span class="c8-card '+(back?'back':c8Red(card.s)?'red':'')+'">'+(back?'✦':card.r+card.s)+'</span>'}
