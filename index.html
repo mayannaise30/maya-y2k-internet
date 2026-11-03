@@ -658,7 +658,36 @@ function petAction(action){
 }
 function petBallStart(){if(petBallFrame)return;const ball=document.getElementById('petBall'),room=document.getElementById('petRoom');let x=room.clientWidth*.48,y=18,vx=2.7,vy=2.2;const tick=()=>{if(ball.hidden||!room.classList.contains('pet-ball-active')){petBallFrame=0;return}x+=vx;y+=vy;if(x<0||x>room.clientWidth-42)vx*=-1;if(y<0||y>room.clientHeight-42)vy*=-1;ball.style.left=x+'px';ball.style.top=y+'px';petBallFrame=requestAnimationFrame(tick)};room.classList.add('pet-ball-active');petBallFrame=requestAnimationFrame(tick)}
 function petBallStop(){document.getElementById('petRoom')?.classList.remove('pet-ball-active');if(petBallFrame)cancelAnimationFrame(petBallFrame);petBallFrame=0}
-function petDragSetup(id,kind){const item=document.getElementById(id),room=document.getElementById('petRoom');let dragging=false,offsetX=0,offsetY=0;item.addEventListener('pointerdown',e=>{if(item.hidden)return;dragging=true;item.setPointerCapture(e.pointerId);const r=item.getBoundingClientRect();offsetX=e.clientX-r.left;offsetY=e.clientY-r.top;e.preventDefault()});item.addEventListener('pointermove',e=>{if(!dragging)return;const r=room.getBoundingClientRect();item.style.left=Math.max(0,Math.min(r.width-item.offsetWidth,e.clientX-r.left-offsetX))+'px';item.style.top=Math.max(0,Math.min(r.height-item.offsetHeight,e.clientY-r.top-offsetY))+'px';item.style.bottom='auto'});item.addEventListener('pointerup',e=>{if(!dragging)return;dragging=false;const a=item.getBoundingClientRect(),b=document.getElementById('fuzzball').getBoundingClientRect();if(a.right>b.left+12&&a.left<b.right-12&&a.bottom>b.top+8&&a.top<b.bottom-8){if(kind==='cake'){pet.hunger=Math.min(100,pet.hunger+22);pet.happy=Math.min(100,pet.happy+7);document.getElementById('petMessage').textContent='nom nom!! fuzzball loved the cake!! 🍰'}else{pet.clean=Math.min(100,pet.clean+28);pet.happy=Math.min(100,pet.happy+5);document.getElementById('petMessage').textContent='all clean and extra fluffy!! 🫧'}item.hidden=true;petSave();petRender()}})}}
+function petDragSetup(id,kind){
+ const item=document.getElementById(id),room=document.getElementById('petRoom');
+ let dragging=false,offsetX=0,offsetY=0;
+ item.addEventListener('pointerdown',e=>{
+  if(item.hidden)return;
+  dragging=true;item.setPointerCapture(e.pointerId);
+  const r=item.getBoundingClientRect();offsetX=e.clientX-r.left;offsetY=e.clientY-r.top;e.preventDefault();
+ });
+ item.addEventListener('pointermove',e=>{
+  if(!dragging)return;
+  const r=room.getBoundingClientRect();
+  item.style.left=Math.max(0,Math.min(r.width-item.offsetWidth,e.clientX-r.left-offsetX))+'px';
+  item.style.top=Math.max(0,Math.min(r.height-item.offsetHeight,e.clientY-r.top-offsetY))+'px';
+  item.style.bottom='auto';
+ });
+ item.addEventListener('pointerup',()=>{
+  if(!dragging)return;dragging=false;
+  const a=item.getBoundingClientRect(),b=document.getElementById('fuzzball').getBoundingClientRect();
+  if(a.right>b.left+12&&a.left<b.right-12&&a.bottom>b.top+8&&a.top<b.bottom-8){
+   if(kind==='cake'){
+    pet.hunger=Math.min(100,pet.hunger+22);pet.happy=Math.min(100,pet.happy+7);
+    document.getElementById('petMessage').textContent='nom nom!! fuzzball loved the cake!! 🍰';
+   }else{
+    pet.clean=Math.min(100,pet.clean+28);pet.happy=Math.min(100,pet.happy+5);
+    document.getElementById('petMessage').textContent='all clean and extra fluffy!! 🫧';
+   }
+   item.hidden=true;petSave();petRender();
+  }
+ });
+}
 function petInitInteractions(){petDragSetup('petCake','cake');petDragSetup('petSoap','soap');document.getElementById('petBall').addEventListener('click',()=>{if(document.getElementById('petBall').hidden)return;pet.happy=Math.min(100,pet.happy+2);petSave();petRender();const b=document.getElementById('petBall');b.style.transform='scale(1.35) rotate(25deg)';setTimeout(()=>b.style.transform='',180)})}
 
 function petTick(){pet.hunger=Math.max(0,pet.hunger-1);pet.clean=Math.max(0,pet.clean-.55);pet.energy=Math.max(0,pet.energy-.45);pet.happy=Math.max(0,pet.happy-.35);petSave();petRender()}
