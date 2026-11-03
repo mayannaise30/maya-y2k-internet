@@ -472,6 +472,8 @@ input,textarea,select{font-size:14px;line-height:1.45}
 .pong-hud{display:flex;justify-content:space-between;font:12px monospace;padding:8px 2px;color:#dcecff}
 @media(max-width:500px){.pet-actions{grid-template-columns:repeat(2,1fr)}.pet-stats{grid-template-columns:1fr 1fr}}
 
+/* Crazy Eights computer opponent */
+.c8-opponent{background:#edf6ffb8;border:1px dashed #789bc3;border-radius:12px;padding:9px;margin:8px 0;text-align:center}.c8-opponent-label{font:11px monospace;font-weight:bold;color:#294d79;display:flex;justify-content:space-between;gap:8px}.c8-opponent-cards{display:flex;justify-content:center;gap:4px;flex-wrap:wrap;padding:8px 0 2px}.c8-opponent-cards .c8-card{width:30px;height:43px;font-size:14px;border-radius:5px}
 /* Crazy Eights card table */
 .c8-table{background:linear-gradient(145deg,#dcecff,#a9c7e8);border:3px ridge #fff;padding:12px;color:#18375f}
 .c8-hud{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;background:#355987;color:white;padding:9px;font:12px monospace}
@@ -573,6 +575,7 @@ input,textarea,select{font-size:14px;line-height:1.45}
 <div class="panel"><h2>♠ CRAZY EIGHTS</h2><p>A classic card game! Play against the computer: match the top card by suit or number. Eights are wild, so you can change the suit.</p>
 <div class="c8-table">
  <div class="c8-hud"><span>YOU: <b id="c8YouCount">0</b> cards</span><span>CRAZY EIGHTS.EXE</span><span>CPU: <b id="c8CpuCount">0</b> cards</span></div>
+ <div class="c8-opponent"><div class="c8-opponent-label">🤖 COMPUTER'S HAND <span id="c8CpuStatus">waiting...</span></div><div class="c8-opponent-cards" id="c8CpuHand"></div></div>
  <div class="c8-center"><div class="c8-pile"><div>DRAW PILE</div><button class="c8-card back" onclick="c8Draw()" aria-label="Draw a card">✦</button><div id="c8DeckCount">0 left</div></div><div class="c8-pile"><div>PLAY THIS</div><div id="c8Discard" class="c8-card">?</div><div id="c8SuitLabel">SUIT: —</div></div></div>
  <div class="c8-note" id="c8Message">Press NEW GAME to start!</div>
  <div class="c8-suits" id="c8SuitChoices" style="display:none;text-align:center">Choose a suit: <button onclick="c8Choose('♠')">♠</button><button onclick="c8Choose('♥')">♥</button><button onclick="c8Choose('♦')">♦</button><button onclick="c8Choose('♣')">♣</button></div>
@@ -730,7 +733,7 @@ function c8New(){let d=c8Shuffle(c8Suits.flatMap(s=>c8Ranks.map(r=>({s,r}))));c8
 function c8Playable(card){return card.r==='8'||card.s===c8.suit||card.r===c8.top.r}
 function c8Red(s){return s==='♥'||s==='♦'}
 function c8CardHTML(card,back=false){return '<span class="c8-card '+(back?'back':c8Red(card.s)?'red':'')+'">'+(back?'✦':card.r+card.s)+'</span>'}
-function c8Render(){if(!document.getElementById('c8Hand'))return;document.getElementById('c8YouCount').textContent=c8.hand.length;document.getElementById('c8CpuCount').textContent=c8.cpu.length;document.getElementById('c8DeckCount').textContent=c8.deck.length+' left';document.getElementById('c8Discard').className='c8-card '+(c8Red(c8.top?.s)?'red':'');document.getElementById('c8Discard').textContent=c8.top?c8.top.r+c8.top.s:'?';document.getElementById('c8SuitLabel').textContent='SUIT: '+(c8.suit||'—');document.getElementById('c8Hand').innerHTML=c8.hand.map((card,i)=>'<button '+(c8.turn!=='you'||c8.over||c8.choosing||!c8Playable(card)?'disabled':'')+' onclick="c8Play('+i+')">'+c8CardHTML(card)+'</button>').join('');document.getElementById('c8SuitChoices').style.display=c8.choosing?'block':'none'}
+function c8Render(){if(!document.getElementById('c8Hand'))return;document.getElementById('c8YouCount').textContent=c8.hand.length;document.getElementById('c8CpuCount').textContent=c8.cpu.length;document.getElementById('c8DeckCount').textContent=c8.deck.length+' left';document.getElementById('c8CpuHand').innerHTML=c8.cpu.map(()=>c8CardHTML(null,true)).join('');document.getElementById('c8CpuStatus').textContent=!c8.started?'waiting...':c8.over?'round over':c8.turn==='cpu'?'thinking...':'your turn';document.getElementById('c8Discard').className='c8-card '+(c8Red(c8.top?.s)?'red':'');document.getElementById('c8Discard').textContent=c8.top?c8.top.r+c8.top.s:'?';document.getElementById('c8SuitLabel').textContent='SUIT: '+(c8.suit||'—');document.getElementById('c8Hand').innerHTML=c8.hand.map((card,i)=>'<button '+(c8.turn!=='you'||c8.over||c8.choosing||!c8Playable(card)?'disabled':'')+' onclick="c8Play('+i+')">'+c8CardHTML(card)+'</button>').join('');document.getElementById('c8SuitChoices').style.display=c8.choosing?'block':'none'}
 function c8Say(t){document.getElementById('c8Message').textContent=t}
 function c8Recycle(){if(c8.deck.length||!c8.top)return;let old=c8.top;c8.deck=c8Shuffle(c8DiscardStack||[]);c8DiscardStack=[];c8.top=old}
 let c8DiscardStack=[];
