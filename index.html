@@ -463,6 +463,12 @@ input,textarea,select{font-size:14px;line-height:1.45}
 .pet-item.ball{left:48%;top:15px;font-size:34px;cursor:pointer}
 .pet-room.sleeping .pet-item{display:none}
 .pet-actions button{margin:0;padding:9px 3px;font-size:10px}
+.pet-actions{grid-template-columns:repeat(5,minmax(0,1fr))}
+.fuzzball{cursor:pointer;transition:filter .2s,transform .2s}
+.fuzzball:active{filter:brightness(1.12)}
+.fuzzball.pet-loved{animation:petLove .55s ease}
+@keyframes petLove{0%,100%{transform:scale(1)}35%{transform:scale(1.14) rotate(-5deg)}70%{transform:scale(.96) rotate(5deg)}}
+@media(max-width:500px){.pet-actions{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @keyframes fuzzFloat{50%{transform:translateY(-7px) rotate(2deg)}}
 .pet-message{background:#fff;padding:9px;text-align:center;border:1px dashed #819fc7;font:12px monospace;margin-top:9px}
 .pet-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-top:10px}
@@ -565,6 +571,7 @@ input,textarea,select{font-size:14px;line-height:1.45}
   <button onclick="petAction('wash')">🫧 WASH</button>
   <button onclick="petAction('sleep')">🌙 SLEEP</button>
   <button onclick="petAction('play')">🎀 PLAY</button>
+  <button onclick="petAction('pet')">♡ GIVE LOVE</button>
  </div>
  <div class="tiny" style="text-align:center;margin-top:9px">TIP: fuzzball needs a little bit of everything ♡</div>
 </div></div>
@@ -653,6 +660,7 @@ function petRender(){
 let petSleeping=false,petBallFrame=0;
 function petAction(action){
  const m=document.getElementById('petMessage'),room=document.getElementById('petRoom');
+ if(action==='pet'){pet.happy=Math.min(100,pet.happy+12);pet.energy=Math.max(0,pet.energy-2);document.getElementById('fuzzball').classList.remove('pet-loved');void document.getElementById('fuzzball').offsetWidth;document.getElementById('fuzzball').classList.add('pet-loved');m.textContent='Fuzzball is purring!! ♡ thanks for the cuddles!';}
  if(action==='feed'){petCake.hidden=false;petSoap.hidden=true;petBall.hidden=true;petBallStop();petCake.style.left='12px';petCake.style.top='auto';petCake.style.bottom='12px';m.textContent='Drag the cake onto Fuzzball for a yummy treat! 🍰'}
  if(action==='wash'){petSoap.hidden=false;petCake.hidden=true;petBall.hidden=true;petBallStop();petSoap.style.left='12px';petSoap.style.top='auto';petSoap.style.bottom='12px';m.textContent='Drag the soap over Fuzzball to give them a bubbly bath! 🧼'}
  if(action==='sleep'){petSleeping=!petSleeping;room.classList.toggle('sleeping',petSleeping);petCake.hidden=true;petSoap.hidden=true;petBall.hidden=true;petBallStop();if(petSleeping){pet.energy=Math.min(100,pet.energy+32);pet.happy=Math.min(100,pet.happy+3);m.textContent='shhh... fuzzball is dreaming under the moon ♡'}else{m.textContent='good morning, fuzzball!! ✧'}}
@@ -691,7 +699,12 @@ function petDragSetup(id,kind){
   }
  });
 }
-function petInitInteractions(){petDragSetup('petCake','cake');petDragSetup('petSoap','soap');document.getElementById('petBall').addEventListener('click',()=>{if(document.getElementById('petBall').hidden)return;pet.happy=Math.min(100,pet.happy+2);petSave();petRender();const b=document.getElementById('petBall');b.style.transform='scale(1.35) rotate(25deg)';setTimeout(()=>b.style.transform='',180)})}
+function petInitInteractions(){
+ petDragSetup('petCake','cake');petDragSetup('petSoap','soap');
+ const ball=document.getElementById('petBall'),fuzz=document.getElementById('fuzzball');
+ ball.addEventListener('click',()=>{if(ball.hidden)return;pet.happy=Math.min(100,pet.happy+5);pet.energy=Math.max(0,pet.energy-1);petSave();petRender();ball.style.transform='scale(1.4) rotate(25deg)';setTimeout(()=>ball.style.transform='',180);document.getElementById('petMessage').textContent='boop!! Fuzzball caught the ball! 🏀'});
+ fuzz.addEventListener('click',()=>{if(petSleeping){document.getElementById('petMessage').textContent='shhh... Fuzzball is sleeping 🌙';return}pet.happy=Math.min(100,pet.happy+3);petSave();petRender();fuzz.classList.remove('pet-loved');void fuzz.offsetWidth;fuzz.classList.add('pet-loved');document.getElementById('petMessage').textContent='♡ *happy fuzzy noises*'});
+}
 
 function petTick(){pet.hunger=Math.max(0,pet.hunger-1);pet.clean=Math.max(0,pet.clean-.55);pet.energy=Math.max(0,pet.energy-.45);pet.happy=Math.max(0,pet.happy-.35);petSave();petRender()}
 setInterval(()=>{if(document.getElementById('petStats'))petTick()},60000);
