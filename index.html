@@ -230,6 +230,113 @@ footer button{margin-top:12px}
   .layout{grid-template-columns:1fr}
 }
 
+
+/* HUMANFINNY-INSPIRED RETRO WEB PORTAL THEME */
+:root{--blue:#86a9d5;--blue2:#6f94c6;--lime:#b9c64e;--lime2:#d4dc75;--ink:#252a2c;--paper:#f5f3f1;--line:#35383a}
+*{box-sizing:border-box}
+body{
+ margin:0;color:#202426;font-family:Nunito,Arial,sans-serif;
+ background:#e9e8e6;
+ background-image:radial-gradient(#d5d4d1 .7px,transparent .8px);
+ background-size:5px 5px;
+}
+header{
+ min-height:34px;padding:5px 18px;
+ background:linear-gradient(#d6df73,#b7c34a);
+ border:0;border-bottom:2px solid #7d8439;
+ box-shadow:none;justify-content:flex-start;align-items:center;gap:16px;
+}
+.brand{font:18px 'Planet Kosmos','Righteous',sans-serif;color:#fff;letter-spacing:.2px;text-shadow:1px 1px #8e9840}
+header .tiny{color:#4d542a;font:10px monospace;margin-left:auto}
+main{max-width:1120px;margin:0 auto;padding:0 10px}
+.hero{
+ position:relative;text-align:left;min-height:205px;padding:35px 34px 22px;
+ border:0;border-radius:0;background:#f7f6f4;
+ box-shadow:none;overflow:hidden;
+ background-image:radial-gradient(circle,#9eb9dd 3px,transparent 3.7px);
+ background-size:13px 13px;background-position:0 0;
+}
+.hero:before{
+ content:'✦ MAYA’S MINI INTERNET';
+ display:block;position:relative;z-index:2;
+ color:#6e91c3;font:10px monospace;letter-spacing:2px;margin-bottom:15px;
+}
+.hero h1{
+ position:relative;z-index:2;display:block;width:max-content;
+ font:clamp(46px,8vw,78px) 'Planet Kosmos','Righteous',sans-serif;
+ color:#7297c9;-webkit-text-fill-color:#7297c9;background:none;
+ letter-spacing:5px;text-shadow:none;filter:none;line-height:1;
+}
+.hero p{
+ position:relative;z-index:2;max-width:460px;background:#f7f6f4e8;
+ color:#42474b;padding:7px 9px;margin:10px 0 12px;
+ font:11px monospace;line-height:1.6;
+}
+.hero .image-sticker{display:none}
+.hero .spark{display:none}
+.hero button{position:relative;z-index:3}
+nav{
+ display:flex;justify-content:flex-start;flex-wrap:nowrap;gap:0;
+ overflow-x:auto;margin:0;padding:0;background:linear-gradient(#55595c,#303437);
+ border-top:2px solid #fff;border-bottom:2px solid #111;border-radius:0;
+}
+nav button{
+ flex:0 0 auto;margin:0;padding:9px 12px;border-radius:0;
+ border:0;border-right:1px solid #888;background:transparent;
+ color:#f4f4f0;box-shadow:none;text-transform:lowercase;
+ font:10px monospace;letter-spacing:.5px;
+}
+nav button:hover{background:#aeba48;color:#202426}
+.page{padding-top:12px}
+.layout{grid-template-columns:minmax(210px,.72fr) minmax(0,1.8fr);gap:12px}
+.panel{
+ background:#fff;border:1px dotted #333;border-radius:0;
+ box-shadow:none;padding:12px;margin-bottom:12px;
+}
+.panel h2{
+ font:17px 'Planet Kosmos','Righteous',sans-serif;
+ color:#7296c5;letter-spacing:1px;text-shadow:none;
+ border-bottom:2px solid #b8c64e;padding:0 0 7px;margin:0 0 10px;
+}
+.panel h3{font:11px monospace;color:#596d86;text-transform:uppercase;letter-spacing:.8px}
+.grid{gap:7px}
+.tile{
+ border:1px solid #c5c8c7;border-radius:0;background:#f8f8f5;
+ box-shadow:none;padding:10px;min-height:80px;
+}
+.tile strong{font:12px 'Planet Kosmos','Righteous',sans-serif;color:#4f719e}
+.tile small{font:10px monospace;color:#4d5559}
+.quote{
+ font:14px Georgia,serif;color:#333;background:#eef2f5;
+ border-left:4px solid #8aa8d0;border-radius:0;padding:10px;
+}
+.window{background:#f0f2f1;border:1px dotted #34383a;border-radius:0;padding:9px}
+button{
+ cursor:pointer;border:1px solid #8799aa;background:#9fb9db;
+ color:#20272d;border-radius:0;padding:7px 10px;
+ font:10px monospace;letter-spacing:.3px;text-transform:uppercase;
+ box-shadow:none;margin:2px;
+}
+button:hover{background:#c1ce65}
+input,textarea,select{
+ font:11px monospace;border:1px solid #9aa6a9;border-radius:0;
+ background:#fff;color:#252a2c;padding:8px;
+}
+.sticker{background:#eef1e4;border:1px dashed #aebc4f;border-radius:0;color:#49532a}
+.word{background:#f8f8f5;border:1px dotted #64778b;border-radius:0}
+.word b{font:12px 'Planet Kosmos','Righteous',sans-serif;color:#6687b5}
+.cover,.artist-cover{border-radius:0;box-shadow:none;border:1px solid #aaa}
+.photo-thumb{border-radius:0;box-shadow:none;border:1px solid #aaa}
+footer{background:#d0d0cb;border-top:1px dotted #333;color:#4c5153;margin-top:14px;font:10px monospace}
+#toast{border-radius:0;box-shadow:none;border:1px solid #333;background:#f6f6ef;font:11px monospace}
+@media(max-width:720px){
+ main{padding:0 6px}
+ .hero{padding:26px 16px;min-height:180px}
+ .layout{grid-template-columns:1fr}
+ nav{flex-wrap:wrap}
+ nav button{flex:1 1 25%;border-bottom:1px solid #777}
+}
+
 </style></head><body>
 <header><div class="brand">✦ MAYA'S MINI INTERNET ✦</div><div class="tiny">best viewed with a little sparkle · since whenever</div></header>
 <main>
