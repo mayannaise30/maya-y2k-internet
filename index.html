@@ -391,6 +391,42 @@ nav button,button{font-size:12px;line-height:1.35}
 p{font-size:14px;line-height:1.6}
 input,textarea,select{font-size:14px;line-height:1.45}
 
+
+/* Y2K desktop music player */
+.music-intro{margin-bottom:12px}
+.wmp-window{border:3px ridge #d9e5f0;background:#d8e0e8;box-shadow:0 5px 0 #8da6c3,0 10px 20px #253b5630;margin:0 0 16px;color:#182c48}
+.wmp-titlebar{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;color:white;font-weight:900;font-size:15px;background:linear-gradient(180deg,#5aa0ff,#0751c5 48%,#003b9b);text-shadow:1px 1px #12356c}
+.wmp-controls{font-size:16px;letter-spacing:1px}
+.wmp-menubar{background:linear-gradient(#fff,#e7e8e6);padding:6px 12px;border-bottom:2px solid #9aa8b8;font:13px Arial,sans-serif;color:#222}
+.wmp-screen{display:grid;grid-template-columns:minmax(150px,.8fr) minmax(160px,1.2fr);gap:12px;padding:12px;background:linear-gradient(135deg,#101d3b,#355e9e 55%,#182b50);align-items:center}
+.wmp-feature-image{height:230px;background-image:linear-gradient(0deg,#061b45aa,transparent 45%),url(sza.png);background-size:cover;background-position:center;filter:saturate(1.35) contrast(1.2);border:3px ridge #9ec8ff;position:relative}
+.wmp-feature-image:after,.pixel-cover:after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(#061d4c55 .7px,transparent .9px);background-size:4px 4px;mix-blend-mode:multiply}
+.wmp-track-info{color:white;display:flex;flex-direction:column;gap:9px;text-shadow:1px 2px #071c48}
+.wmp-track-info strong{font-size:12px;color:#b8d6ff;letter-spacing:1px}
+.wmp-track-info span{font-size:clamp(20px,4vw,34px);font-weight:900;line-height:1.1}
+.wmp-track-info small{font:10px monospace;color:#d8e8ff}
+.wmp-controlsbar{display:flex;align-items:center;gap:10px;padding:10px 12px;background:linear-gradient(#9fc9f7,#416db0 55%,#234b8b);color:white;font-weight:900;border-top:2px solid #dcecff}
+.wmp-play{width:39px;height:39px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(white,#b9d6f7);color:#17427d;border:2px ridge white;font-size:17px}
+.wmp-progress{height:7px;flex:1;background:#193b76;border:1px solid #c5dcf6;border-radius:8px;overflow:hidden}
+.wmp-progress i{display:block;width:38%;height:100%;background:linear-gradient(90deg,#a8db83,#f4f6b5)}
+.wmp-volume{font-size:11px;color:#dff0ff}
+.wmp-status{background:#e8edf2;padding:5px 10px;color:#3b4b5e;font:10px monospace;border-top:1px solid white}
+.music-artists{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:10px}
+.music-artist{background:linear-gradient(145deg,#fafdff,#dceaff);border:2px ridge #b4c9e4;padding:8px;text-align:center;min-width:0}
+.music-artist strong{display:block;color:#28568e;font-size:12px;margin:5px 0}
+.music-artist small{font-size:11px;line-height:1.4;color:#41556d}
+.pixel-cover{height:120px;position:relative;border:3px ridge #b6d8ff!important;border-radius:0!important;box-shadow:inset 0 0 15px #0a2c5a66!important;filter:saturate(1.3) contrast(1.13)}
+.music-lower{display:grid;grid-template-columns:minmax(200px,.85fr) minmax(0,1.15fr);gap:12px;align-items:start}
+.wmp-playlist{border:3px ridge #a9c8e9;background:#e7edf6;box-shadow:0 4px 0 #91a9c6}
+.playlist-title{background:linear-gradient(#d8edff,#8eb6e7);padding:9px;color:#173c70;font-size:12px;font-weight:900;border-bottom:2px solid #7998c2}
+.playlist-track{display:flex;align-items:center;gap:9px;padding:7px;border-bottom:1px solid #c2d1e2;color:#1c3454;font-size:12px}
+.playlist-track:nth-child(even){background:#f7faff}
+.playlist-track span:last-child{display:flex;flex-direction:column;gap:2px}
+.playlist-track small{font-size:10px;color:#647994}
+.track-thumb{width:40px;height:40px;flex:none;background-size:cover;background-position:center;border:2px ridge white;filter:saturate(1.3) contrast(1.1)}
+.music-create{margin:0}
+@media(max-width:600px){.wmp-screen{grid-template-columns:1fr}.wmp-feature-image{height:210px}.music-lower{grid-template-columns:1fr}.wmp-controlsbar{gap:6px}.wmp-volume{display:none}}
+
 </style></head><body>
 <header><div class="brand">✦ MAYA'S MINI INTERNET ✦</div><div class="tiny">best viewed with a little sparkle · since whenever</div></header>
 <main>
@@ -403,8 +439,45 @@ input,textarea,select{font-size:14px;line-height:1.45}
 <aside><div class="panel"><h2>♡ guestbook</h2><input id="guestName" placeholder="your nickname"><textarea id="guestMsg" placeholder="leave a little message..."></textarea><button onclick="guest()">sign guestbook</button><div id="guestView"></div></div><div class="panel"><h2>✦ random button</h2><p id="random">click for a random internet thought...</p><button onclick="randomThought()">surprise me </button></div></aside></div></section>
 <section class="page" id="scrapbook"><div class="panel"><h2> digital scrapbook</h2><p>Add photos from your device; they stay in this browser on this device.</p><input type="file" id="photo" accept="image/*"><input id="caption" placeholder="caption / memory..."><button onclick="addPhoto()">add to scrapbook</button><div class="grid" id="photos"></div></div><div class="panel"><h2> little scraps</h2><span class="sticker">✧ stay dreamy</span><span class="sticker">♡ main character energy</span><span class="sticker"> replay it</span><span class="sticker"> growing & glowing</span><textarea id="note" placeholder="write a note or memory..."></textarea><button onclick="addNote()">pin note</button><div id="notes"></div></div></section>
 <section class="page" id="profile"><div class="panel"><h2>♡ the profile page</h2><div class="cover" style="background-image:url(https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=900&h=420&fit=crop)"></div><label>Display name</label><input id="pname" placeholder="Maya"><label>About me</label><textarea id="about" placeholder="A few things about me..."></textarea><label>Current mood</label><input id="mood" placeholder="daydreaming / inspired / ..."><label>Currently listening to</label><input id="listening" placeholder="song — artist"><button onclick="saveProfile()">save profile</button><div class="quote" id="profileView">your profile preview will show here...</div><div class="grid"><div class="tile"><strong>style archive</strong><small>outfits & inspiration</small></div><div class="tile"><strong>humor folder</strong><small>things that make me laugh</small></div><div class="tile"><strong>this is so me</strong><small>save your favorites</small></div></div></div></section>
-<section class="page" id="music"><div class="panel"><h2> music world</h2><p>Visual-only music corner: no audio plays and no Spotify account is connected.</p><div class="grid"><div class="tile"><div class="artist-cover" style="background-image:url(sza.png)"></div><strong>SZA</strong><small>LANA / dreamy greens</small></div><div class="tile"><div class="artist-cover" style="background-image:url(don-toliver.png)"></div><strong>Don Toliver</strong><small>HARDSTONE PSYCHO</small></div><div class="tile"><div class="artist-cover" style="background-image:url(kanye-west.png)"></div><strong>Kanye West</strong><small>THE LIFE OF PABLO</small></div><div class="tile"><div class="artist-cover" style="background-image:url(daniel-caesar.png)"></div><strong>Daniel Caesar</strong><small>soft & dreamy</small></div><div class="tile"><div class="artist-cover" style="background-image:url(bryant-barnes.png)"></div><strong>Bryant Barnes</strong><small>soft atmosphere</small></div></div></div><div class="panel"><h2>♫ make your own playlist</h2><input id="plname" placeholder="playlist name"><input id="plmood" placeholder="vibe / mood"><textarea id="plsongs" placeholder="songs, one per line..."></textarea><button onclick="playlist()">create playlist</button><div id="playlists"></div></div><div class="panel"><h2>✧ song memory</h2><input id="song" placeholder="song — artist"><textarea id="memory" placeholder="What does this song remind you of?"></textarea><button onclick="songMemory()">save memory</button><div id="memories"></div></div></section>
-<section class="page" id="tv"><div class="panel"><h2> the watch vault</h2><div class="grid"><div class="tile"><img class="photo-thumb" src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=500&h=300&fit=crop" alt="fashion editorial"><strong>ANTM</strong><small>reality TV archive</small></div><div class="tile"><img class="photo-thumb" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&h=300&fit=crop" alt="glam portrait"><strong>KUWTK</strong><small>reality TV archive</small></div><div class="tile"><img class="photo-thumb" src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=500&h=300&fit=crop" alt="dark cinema mood"><strong>Scream (1996)</strong><small>horror vault</small></div></div><h3>my watchlist</h3><div class="row"><input id="watchTitle" placeholder="show or movie"><select id="watchType"><option>Show</option><option>Movie</option><option>Horror vault</option></select><button onclick="watchAdd()">add</button></div><div id="watchView"></div><h3>iconic moment / quote archive</h3><input id="source" placeholder="show / movie"><textarea id="quote" placeholder="Add a short quote or describe a funny moment..."></textarea><button onclick="quoteAdd()">save moment</button><div id="quotes"></div></div></section>
+<section class="page" id="music">
+<div class="panel music-intro">
+  <h2>♫ MY MUSIC DESKTOP</h2>
+  <p>A little corner for the artists, songs, and sounds that stay on repeat. Inspired by the old computer music players of the 2000s.</p>
+</div>
+<div class="wmp-window">
+  <div class="wmp-titlebar"><span>◉ Windows Media Player</span><span class="wmp-controls">－　□　×</span></div>
+  <div class="wmp-menubar">File　 View　 Play　 Tools　 Help</div>
+  <div class="wmp-screen">
+    <div class="wmp-feature-image" role="img" aria-label="SZA artist photo"></div>
+    <div class="wmp-track-info"><strong>NOW IN MY ROTATION</strong><span>SZA · Normal Girl</span><small>MY MUSIC COLLECTION / 2000s PLAYER SKIN</small></div>
+  </div>
+  <div class="wmp-controlsbar"><span class="wmp-play">▶</span><span>◀◀</span><span>Ⅱ</span><span>▶▶</span><div class="wmp-progress"><i></i></div><span class="wmp-volume">━●━━</span></div>
+  <div class="wmp-status">VISUAL PLAYER · NO AUDIO · JUST THE VIBE</div>
+</div>
+<div class="panel">
+  <h2>✦ ARTIST LIBRARY</h2>
+  <p class="music-sub">click around your favorite artists — each one has their own little desktop tile.</p>
+  <div class="music-artists">
+    <div class="music-artist"><div class="artist-cover pixel-cover" style="background-image:url(sza.png)"></div><strong>SZA</strong><small>Normal Girl · Broken Clocks · Nobody Gets Me</small></div>
+    <div class="music-artist"><div class="artist-cover pixel-cover" style="background-image:url(don-toliver.png)"></div><strong>DON TOLIVER</strong><small>Bandit · your Don corner</small></div>
+    <div class="music-artist"><div class="artist-cover pixel-cover" style="background-image:url(kanye-west.png)"></div><strong>KANYE WEST</strong><small>Ghost Town, Pt. 2</small></div>
+    <div class="music-artist"><div class="artist-cover pixel-cover" style="background-image:url(daniel-caesar.png)"></div><strong>DANIEL CAESAR</strong><small>Japanese Denim</small></div>
+    <div class="music-artist"><div class="artist-cover pixel-cover" style="background-image:url(bryant-barnes.png)"></div><strong>BRYANT BARNES</strong><small>Apollo · Juliet</small></div>
+  </div>
+</div>
+<div class="music-lower">
+  <div class="wmp-playlist">
+    <div class="playlist-title">♫ PLAYLIST EXPLORER</div>
+    <div class="playlist-track"><span class="track-thumb" style="background-image:url(sza.png)"></span><span><b>Normal Girl</b><small>SZA</small></span></div>
+    <div class="playlist-track"><span class="track-thumb" style="background-image:url(sza.png)"></span><span><b>Broken Clocks</b><small>SZA</small></span></div>
+    <div class="playlist-track"><span class="track-thumb" style="background-image:url(kanye-west.png)"></span><span><b>Ghost Town, Pt. 2</b><small>Kanye West</small></span></div>
+    <div class="playlist-track"><span class="track-thumb" style="background-image:url(daniel-caesar.png)"></span><span><b>Japanese Denim</b><small>Daniel Caesar</small></span></div>
+    <div class="playlist-track"><span class="track-thumb" style="background-image:url(bryant-barnes.png)"></span><span><b>Apollo</b><small>Bryant Barnes</small></span></div>
+  </div>
+  <div class="panel music-create"><h2>♫ MAKE YOUR OWN PLAYLIST</h2><input id="plname" placeholder="playlist name"><input id="plmood" placeholder="vibe / mood"><textarea id="plsongs" placeholder="songs, one per line..."></textarea><button onclick="playlist()">create playlist</button><div id="playlists"></div></div>
+</div>
+<div class="panel"><h2>✧ SONG MEMORY</h2><input id="song" placeholder="song — artist"><textarea id="memory" placeholder="What does this song remind you of?"></textarea><button onclick="songMemory()">save memory</button><div id="memories"></div></div>
+</section><section class="page" id="tv"><div class="panel"><h2> the watch vault</h2><div class="grid"><div class="tile"><img class="photo-thumb" src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=500&h=300&fit=crop" alt="fashion editorial"><strong>ANTM</strong><small>reality TV archive</small></div><div class="tile"><img class="photo-thumb" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&h=300&fit=crop" alt="glam portrait"><strong>KUWTK</strong><small>reality TV archive</small></div><div class="tile"><img class="photo-thumb" src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=500&h=300&fit=crop" alt="dark cinema mood"><strong>Scream (1996)</strong><small>horror vault</small></div></div><h3>my watchlist</h3><div class="row"><input id="watchTitle" placeholder="show or movie"><select id="watchType"><option>Show</option><option>Movie</option><option>Horror vault</option></select><button onclick="watchAdd()">add</button></div><div id="watchView"></div><h3>iconic moment / quote archive</h3><input id="source" placeholder="show / movie"><textarea id="quote" placeholder="Add a short quote or describe a funny moment..."></textarea><button onclick="quoteAdd()">save moment</button><div id="quotes"></div></div></section>
 <section class="page" id="words"><div class="panel"><h2>✧ rare words wall</h2><p>Only the words you personally chose.</p><div class="grid" id="wordGrid"></div></div></section>
 <section class="page" id="studio"><div class="panel"><h2> creative studio</h2><p>Make a little graphic using text and a color.</p><input id="graphicText" placeholder="your quote / phrase"><input type="color" id="graphicColor" value="#d7edff"><button onclick="graphic()">create graphic</button><div class="grid" id="graphics"></div><h3>sticker tray</h3><span class="sticker">✦ sparkle</span><span class="sticker"> butterfly</span><span class="sticker"> CD</span><span class="sticker">♡ heart</span><span class="sticker">✿ flower</span><span class="sticker"> cloud</span><span class="sticker">☆ star</span><span class="sticker">♫ music</span></div></section>
 <section class="page" id="universe"><div class="panel"><h2> my universe</h2><p>A place for fictional characters, alternate worlds, made-up lore, and ideas.</p><input id="worldName" placeholder="name this world"><textarea id="lore" placeholder="What is this world like? Who lives there?"></textarea><button onclick="worldAdd()">save world</button><div id="worlds"></div></div></section>
