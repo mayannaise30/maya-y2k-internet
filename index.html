@@ -437,6 +437,29 @@ input,textarea,select{font-size:14px;line-height:1.45}
 .bird-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}
 .bird-actions button{background:linear-gradient(#fff,#c5dcf5 55%,#85a9d5);border:2px ridge #fff;color:#173b70}
 
+
+/* Y2K virtual pet + pixel pong */
+.pet-shell{background:linear-gradient(145deg,#dcecff,#f9fbff 55%,#d9e7fa);border:3px ridge #fff;padding:14px;box-shadow:inset 0 0 0 1px #9db9d8}
+.pet-top{display:flex;justify-content:space-between;gap:8px;align-items:center;background:linear-gradient(#7196c8,#405f91);color:white;padding:9px 12px;font: bold 12px monospace}
+.pet-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
+.pet-stat{background:#fff;border:1px solid #a9bfdc;padding:7px;font:11px monospace}
+.pet-meter{height:10px;background:#e5e9ee;border:1px solid #b8c5d2;margin-top:5px;overflow:hidden}
+.pet-meter i{display:block;height:100%;background:linear-gradient(90deg,#a9c4ec,#668ec5);width:70%;transition:width .25s}
+.pet-room{min-height:225px;display:grid;place-items:center;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 40%,#fff 0 3px,transparent 4px),linear-gradient(#e7f3ff,#b9d2ef);background-size:18px 18px,auto;border:2px inset #fff}
+.fuzzball{width:125px;height:115px;border-radius:48% 52% 46% 54%;background:radial-gradient(circle at 35% 28%,#fff 0 4%,#f5f2ff 13%,#c7b8e8 52%,#8f80bd 100%);box-shadow:inset -8px -10px 0 #7667a655,0 10px 18px #435c8755;position:relative;animation:fuzzFloat 2.5s ease-in-out infinite}
+.fuzzball:before{content:'✦  ✧  ✦';position:absolute;top:-17px;left:17px;color:#fff;font-size:13px;text-shadow:0 1px 4px #7895c9}
+.fuzz-eyes{position:absolute;top:42px;left:34px;width:9px;height:13px;border-radius:50%;background:#38445c;box-shadow:42px 0 #38445c}
+.fuzz-mouth{position:absolute;top:65px;left:56px;width:13px;height:7px;border-bottom:2px solid #705a84;border-radius:50%}
+.fuzz-cheek{position:absolute;top:59px;left:19px;width:15px;height:8px;border-radius:50%;background:#f5a9c4aa;box-shadow:54px 0 #f5a9c4aa}
+@keyframes fuzzFloat{50%{transform:translateY(-7px) rotate(2deg)}}
+.pet-message{background:#fff;padding:9px;text-align:center;border:1px dashed #819fc7;font:12px monospace;margin-top:9px}
+.pet-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-top:10px}
+.pet-actions button{margin:0;padding:9px 3px;font-size:10px}
+.pong-wrap{background:#172b4b;border:4px ridge #c9dcf4;padding:10px;color:#e9f4ff}
+#pongCanvas{width:100%;max-width:640px;display:block;margin:auto;background:#101f3d;border:2px solid #9dbbe1;touch-action:none}
+.pong-hud{display:flex;justify-content:space-between;font:12px monospace;padding:8px 2px;color:#dcecff}
+@media(max-width:500px){.pet-actions{grid-template-columns:repeat(2,1fr)}.pet-stats{grid-template-columns:1fr 1fr}}
+
 </style></head><body>
 <header><div class="brand">✦ MAYA'S MINI INTERNET ✦</div><div class="tiny">best viewed with a little sparkle · since whenever</div></header>
 <main>
@@ -500,6 +523,26 @@ input,textarea,select{font-size:14px;line-height:1.45}
 <p class="muted">Tip: small taps work better than holding the button. On a computer, use SPACE or click the game.</p>
 </div>
 
+
+<div class="panel"><h2>♡ FUZZBALL'S LITTLE WORLD</h2><p>Meet your tiny fuzzy friend! Keep it happy by feeding, washing, and tucking it in. Your progress saves on this device.</p>
+<div class="pet-shell">
+ <div class="pet-top"><span>FUZZBALL.EXE</span><span>♡ PET CARE 2004</span></div>
+ <div class="pet-stats" id="petStats"></div>
+ <div class="pet-room"><div class="fuzzball" id="fuzzball"><i class="fuzz-eyes"></i><i class="fuzz-cheek"></i><i class="fuzz-mouth"></i></div></div>
+ <div class="pet-message" id="petMessage">hi!! i'm fuzzball. wanna hang out? ✧</div>
+ <div class="pet-actions">
+  <button onclick="petAction('feed')">🍰 FEED CAKE</button>
+  <button onclick="petAction('wash')">🫧 WASH</button>
+  <button onclick="petAction('sleep')">🌙 SLEEP</button>
+  <button onclick="petAction('play')">🎀 PLAY</button>
+ </div>
+ <div class="tiny" style="text-align:center;margin-top:9px">TIP: fuzzball needs a little bit of everything ♡</div>
+</div></div>
+<div class="panel"><h2>✦ PIXEL PONG</h2><p>Classic arcade pong with a frosty Y2K computer-lab look. Move your paddle with your mouse, finger, or the ↑ and ↓ keys.</p>
+<div class="pong-wrap"><div class="pong-hud"><span>PLAYER <b id="pongPlayer">0</b></span><span>PIXEL PONG.EXE</span><span>CPU <b id="pongCpu">0</b></span></div><canvas id="pongCanvas" width="640" height="360" aria-label="Pixel Pong game"></canvas><div class="pong-hud"><span id="pongStatus">READY</span><span>FIRST TO 7 WINS</span></div></div>
+<div style="text-align:center;margin-top:9px"><button onclick="pongStart()">▶ START / RESUME</button><button onclick="pongReset()">↻ NEW GAME</button></div>
+</div>
+
 </section>
 <footer>made of daydreams, pixels & icy blue glitter ✧<br><button onclick="backup()">export my data</button><button onclick="resetSite()">reset saved site data</button><p>Your edits are saved in this browser. Photos stay local to this browser/device.</p></footer>
 </main><div id="toast"></div>
@@ -558,5 +601,54 @@ function birdLoop(){
 }
 document.addEventListener('keydown',e=>{if(e.code==='Space'&&document.getElementById('games')?.classList.contains('active')){e.preventDefault();birdFlap()}});
 document.addEventListener('DOMContentLoaded',()=>{const c=document.getElementById('birdCanvas');if(c){c.addEventListener('pointerdown',e=>{e.preventDefault();birdFlap()});birdReset()}});
+
+/* Fuzzball virtual pet */
+const petDefaults={hunger:78,clean:82,energy:75,happy:80};
+let pet={...petDefaults,...(D.pet||{})};
+function petSave(){D.pet=pet;save()}
+function petRender(){
+ const labels=[['hunger','FULLNESS'],['clean','CLEAN'],['energy','ENERGY'],['happy','HAPPINESS']];
+ document.getElementById('petStats').innerHTML=labels.map(([k,l])=>'<div class="pet-stat">'+l+' <b>'+Math.round(pet[k])+'%</b><div class="pet-meter"><i style="width:'+Math.max(0,Math.min(100,pet[k]))+'%"></i></div></div>').join('');
+ const sleepy=pet.energy<22;document.getElementById('fuzzball').style.filter=pet.clean<20?'hue-rotate(35deg) saturate(.7)':sleepy?'brightness(.85)':'none';
+}
+function petAction(action){
+ const m=document.getElementById('petMessage');
+ if(action==='feed'){pet.hunger=Math.min(100,pet.hunger+22);pet.happy=Math.min(100,pet.happy+7);m.textContent='nom nom!! CAKE!! 🍰'}
+ if(action==='wash'){pet.clean=Math.min(100,pet.clean+28);pet.happy=Math.min(100,pet.happy+5);m.textContent='bubbly and sparkly now!! 🫧'}
+ if(action==='sleep'){pet.energy=Math.min(100,pet.energy+32);pet.happy=Math.min(100,pet.happy+3);m.textContent='zzz... that was a good nap ♡'}
+ if(action==='play'){if(pet.energy<12){m.textContent='i'm too sleepy to play... let me nap first 🌙'}else{pet.happy=Math.min(100,pet.happy+18);pet.energy=Math.max(0,pet.energy-12);pet.hunger=Math.max(0,pet.hunger-5);m.textContent='WHEEEE!! best day ever!! ✧'}}
+ petSave();petRender();
+}
+function petTick(){pet.hunger=Math.max(0,pet.hunger-1);pet.clean=Math.max(0,pet.clean-.55);pet.energy=Math.max(0,pet.energy-.45);pet.happy=Math.max(0,pet.happy-.35);petSave();petRender()}
+setInterval(()=>{if(document.getElementById('petStats'))petTick()},60000);
+/* Pixel Pong */
+let pong={running:false,player:0,cpu:0,ballX:320,ballY:180,vx:4,vy:2.5,paddle:140,raf:0};
+function pongDraw(){
+ const c=document.getElementById('pongCanvas');if(!c)return;const x=c.getContext('2d');x.clearRect(0,0,640,360);x.fillStyle='#14294a';x.fillRect(0,0,640,360);
+ x.fillStyle='#7899c8';for(let y=8;y<360;y+=22)x.fillRect(317,y,6,12);
+ x.fillStyle='#dcecff';x.fillRect(20,pong.paddle,12,78);x.fillRect(608,Math.max(0,Math.min(282,pong.ballY-39)),12,78);
+ x.fillStyle='#e8f4ff';x.fillRect(pong.ballX-7,pong.ballY-7,14,14);
+ document.getElementById('pongPlayer').textContent=pong.player;document.getElementById('pongCpu').textContent=pong.cpu;
+}
+function pongStart(){if(pong.player>=7||pong.cpu>=7)pongReset();pong.running=true;document.getElementById('pongStatus').textContent='PLAYING';pongLoop()}
+function pongReset(){cancelAnimationFrame(pong.raf);pong={running:false,player:0,cpu:0,ballX:320,ballY:180,vx:4,vy:2.5,paddle:140,raf:0};document.getElementById('pongStatus').textContent='READY';pongDraw()}
+function pongLoop(){
+ if(!pong.running)return;pong.ballX+=pong.vx;pong.ballY+=pong.vy;
+ if(pong.ballY<8||pong.ballY>352)pong.vy*=-1;
+ const cpuY=Math.max(0,Math.min(282,pong.ballY-39)); 
+ if(pong.vx<0&&pong.ballX<39&&pong.ballY>pong.paddle-5&&pong.ballY<pong.paddle+83){pong.vx=Math.abs(pong.vx)*1.04;pong.vy+=(pong.ballY-(pong.paddle+39))*.035}
+ if(pong.vx>0&&pong.ballX>601&&pong.ballY>cpuY-5&&pong.ballY<cpuY+83){pong.vx=-Math.abs(pong.vx)*1.03;pong.vy+=(pong.ballY-(cpuY+39))*.03}
+ if(pong.ballX<0){pong.cpu++;pongServe(-1)}
+ if(pong.ballX>640){pong.player++;pongServe(1)}
+ if(pong.player>=7||pong.cpu>=7){pong.running=false;document.getElementById('pongStatus').textContent=pong.player>pong.cpu?'YOU WIN ✦':'CPU WINS — TRY AGAIN';pongDraw();return}
+ pongDraw();pong.raf=requestAnimationFrame(pongLoop)
+}
+function pongServe(dir){pong.ballX=320;pong.ballY=180;pong.vx=4*dir;pong.vy=(Math.random()*4-2)||2}
+function pongMove(y){pong.paddle=Math.max(0,Math.min(282,y-39));pongDraw()}
+document.addEventListener('keydown',e=>{if(document.getElementById('games')?.classList.contains('active')){if(e.key==='ArrowUp'){e.preventDefault();pongMove(pong.paddle-22)}if(e.key==='ArrowDown'){e.preventDefault();pongMove(pong.paddle+22)}}});
+document.addEventListener('DOMContentLoaded',()=>{const c=document.getElementById('pongCanvas');if(c){c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();pongMove((e.clientY-r.top)*360/r.height)});c.addEventListener('pointerdown',e=>{const r=c.getBoundingClientRect();pongMove((e.clientY-r.top)*360/r.height)});pongReset()}});
+
 render();
+if(document.getElementById('petStats'))petRender();
+if(document.getElementById('pongCanvas'))pongDraw();
 </script></body></html>
