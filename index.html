@@ -46,10 +46,194 @@ h1{letter-spacing:3px;text-shadow:0 2px 0 #ffffff80,0 5px 14px #5aa7d566}
 .panel h2{letter-spacing:.7px;text-shadow:1px 1px 0 #d8efff}
 nav button,button{letter-spacing:.25px}
 .tile strong{font-size:13px;letter-spacing:.35px}
+
+/* PERSONAL BLOG REDESIGN */
+:root{--blue:#9dbbd0;--ink:#263b4b;--deep:#42677e;--line:#d8e2e8}
+body{
+  background:#f4f1eb;
+  background-image:radial-gradient(#d9e2e7 0.7px,transparent 0.7px);
+  background-size:18px 18px;
+  color:#334653;
+  font-family:Nunito,Arial,sans-serif;
+}
+header{
+  background:#f4f1eb;
+  border:0;
+  border-bottom:1px solid #d6d2ca;
+  box-shadow:none;
+  padding:18px max(5%,calc((100% - 1100px)/2));
+}
+.brand{
+  font-family:'Planet Kosmos','Righteous',sans-serif;
+  font-size:20px;
+  color:#456d85;
+  letter-spacing:1px;
+  text-shadow:none;
+}
+header .tiny{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#82919a}
+main{max-width:1050px;margin:34px auto;padding:0 22px}
+.hero{
+  text-align:left;
+  padding:42px clamp(20px,5vw,58px);
+  border:1px solid #dce3e6;
+  border-radius:3px;
+  background:#fff;
+  box-shadow:0 8px 28px #4559670d;
+  overflow:hidden;
+}
+.hero:before{
+  content:'A PERSONAL BLOG · NOTES, MUSIC & LITTLE OBSERVATIONS';
+  display:block;
+  font-size:10px;
+  letter-spacing:2px;
+  color:#8b9da8;
+  margin-bottom:16px;
+}
+.hero .image-sticker{opacity:.13;width:170px;height:170px;border:0;box-shadow:none;filter:grayscale(1)}
+.hero .hero-left{left:auto;right:20%;top:4%;transform:rotate(-10deg)}
+.hero .hero-right{right:3%;top:24%;transform:rotate(8deg)}
+.hero .spark{display:none}
+h1{
+  font-family:'Planet Kosmos','Righteous',sans-serif;
+  font-size:clamp(52px,9vw,88px);
+  line-height:1.08;
+  letter-spacing:1px;
+  color:#42677e;
+  background:none;
+  -webkit-text-fill-color:#42677e;
+  filter:none;
+  text-shadow:none;
+  margin:0;
+}
+.hero p{font-size:15px;line-height:1.8;color:#71828c;max-width:520px;margin:13px 0 22px}
+button{
+  border:1px solid #cbd9df;
+  background:#f7fafb;
+  color:#45677c;
+  border-radius:3px;
+  padding:9px 14px;
+  box-shadow:none;
+  font:700 11px Nunito,Arial,sans-serif;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+button:hover{background:#eaf1f4}
+nav{
+  justify-content:flex-start;
+  gap:0;
+  border-top:1px solid #d6d2ca;
+  border-bottom:1px solid #d6d2ca;
+  padding:8px 0;
+  margin:22px 0 28px;
+}
+nav button{
+  border:0;
+  border-right:1px solid #d8e0e4;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  color:#6b7d87;
+  font:700 10px Nunito,Arial,sans-serif;
+  letter-spacing:1.1px;
+  padding:8px 13px;
+}
+nav button:last-child{border-right:0}
+nav button:hover{background:#e9eff1;color:#355b72}
+.page.active{animation:blogFade .25s ease}
+@keyframes blogFade{from{opacity:.5;transform:translateY(4px)}to{opacity:1;transform:none}}
+.layout{grid-template-columns:minmax(0,1.65fr) minmax(220px,.75fr);gap:22px}
+.panel{
+  background:#fff;
+  border:1px solid #e0e5e6;
+  border-radius:3px;
+  box-shadow:0 5px 18px #4559670a;
+  padding:clamp(17px,3vw,27px);
+  margin-bottom:20px;
+}
+.panel h2{
+  font:22px 'Planet Kosmos','Righteous',sans-serif;
+  color:#42677e;
+  letter-spacing:.3px;
+  border-bottom:1px solid #e4e9eb;
+  padding-bottom:12px;
+  margin-bottom:16px;
+  text-shadow:none;
+}
+.panel h3{
+  color:#54788c;
+  font-size:12px;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+}
+.grid{gap:12px}
+.tile{
+  background:#f8faf9;
+  border:1px solid #e2e8e9;
+  border-radius:3px;
+  box-shadow:none;
+  text-align:left;
+  padding:15px;
+}
+.tile strong{
+  font:14px 'Planet Kosmos','Righteous',sans-serif;
+  color:#45677c;
+  letter-spacing:0;
+}
+.tile small{display:block;margin-top:5px;color:#89979d;line-height:1.5}
+.quote{
+  font:16px Georgia,serif;
+  font-style:italic;
+  color:#5c7889;
+  background:#f6f8f7;
+  border-left:2px solid #9dbbd0;
+  border-radius:0;
+  padding:15px 17px;
+}
+.window{
+  background:#fafbfa;
+  border:1px solid #e2e8e9;
+  border-radius:2px;
+}
+input,textarea,select{
+  border:1px solid #d8e1e4;
+  border-radius:2px;
+  background:#fff;
+  color:#334653;
+  font-size:14px;
+}
+input:focus,textarea:focus,select:focus{outline:2px solid #d7e6ed;border-color:#9dbbd0}
+.sticker{
+  background:#f5f8f8;
+  border:1px solid #dce6e9;
+  border-radius:2px;
+  color:#688394;
+}
+.word{
+  background:#fafbfa;
+  border:1px solid #e2e8e9;
+  border-radius:2px;
+}
+.word b{font-family:'Planet Kosmos','Righteous',sans-serif;color:#45677c}
+.cover,.artist-cover{border-radius:2px;box-shadow:none}
+.photo-thumb{border-radius:2px;box-shadow:none}
+footer{color:#8a989e;border-top:1px solid #d8dedf;margin-top:35px;padding-top:22px}
+footer button{margin-top:12px}
+#toast{border-radius:2px;box-shadow:0 5px 18px #45596722}
+@media(max-width:720px){
+  main{margin:18px auto;padding:0 13px}
+  .hero{padding:30px 22px}
+  .hero .image-sticker{width:90px;height:90px}
+  .hero .hero-left{right:18%;top:4%}
+  .hero .hero-right{right:1%;top:15%}
+  nav{justify-content:center}
+  nav button{flex:1 1 30%;border-bottom:1px solid #e1e5e5}
+  .layout{grid-template-columns:1fr}
+}
+
 </style></head><body>
 <header><div class="brand">✦ MAYA'S MINI INTERNET ✦</div><div class="tiny">best viewed with a little sparkle · since whenever</div></header>
 <main>
-<section class="hero"><img class="image-sticker hero-left" src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=360&h=360&fit=crop" alt="blue ocean"><img class="image-sticker hero-right" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=360&h=360&fit=crop" alt="starry night sky"><span class="spark a">✧</span><span class="spark d">♡</span><h1>Maya</h1><p>a tiny corner of the internet • scrapbooked with music, memories & random things</p><button onclick="page('scrapbook')">open my scrapbook </button><button onclick="page('music')">enter music world ♫</button></section>
+<section class="hero"><img class="image-sticker hero-left" src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=360&h=360&fit=crop" alt="blue ocean"><img class="image-sticker hero-right" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=360&h=360&fit=crop" alt="starry night sky"><span class="spark a">✧</span><span class="spark d">♡</span><h1>Maya</h1><p>personal notes, favorite things, music, memories & everything in between</p><button onclick="page('scrapbook')">read the scrapbook </button><button onclick="page('music')">visit the music journal </button></section>
 <nav><button onclick="page('home')">⌂ Home</button><button onclick="page('scrapbook')"> Scrapbook</button><button onclick="page('profile')">About me</button><button onclick="page('music')">Music</button><button onclick="page('tv')"> TV & Movies</button><button onclick="page('words')">Word wall</button><button onclick="page('studio')"> Studio</button><button onclick="page('universe')"> Universe</button><button onclick="page('games')"> Secrets</button></nav>
 <section class="page active" id="home"><div class="layout"><div>
 <div class="panel"><h2>✦ welcome to my internet</h2><p>Your own little portal. Add pictures and notes, make playlists, collect words, and decorate your pages.</p><div class="grid">
