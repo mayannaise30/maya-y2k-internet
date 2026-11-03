@@ -570,7 +570,7 @@ document.getElementById('photos').innerHTML=(D.photos||[]).map(x=>`<div class="t
 let p=D.profile||['','','',''];['pname','about','mood','listening'].forEach((id,i)=>document.getElementById(id).value=p[i]||'');document.getElementById('profileView').textContent=`${p[0]||'Maya'} · ${p[2]||'mood TBD'} · listening to ${p[3]||'...'} — ${p[1]||'add a little about yourself'}`;
 document.getElementById('playlists').innerHTML=(D.playlists||[]).map(x=>`<div class="window"><h3> ${esc(x[0])}</h3><p>${esc(x[1])}</p><pre>${esc(x[2])}</pre></div>`).join('');document.getElementById('memories').innerHTML=(D.memories||[]).map(x=>`<div class="quote"><b>${esc(x[0])}</b><br>${esc(x[1])}</div>`).join('');
 document.getElementById('watchView').innerHTML=(D.watch||[]).map(x=>`<div class="window">${esc(x[0])} · ${esc(x[1])}</div>`).join('');document.getElementById('quotes').innerHTML=(D.quotes||[]).map(x=>`<div class="quote"><b>${esc(x[0])}</b><br>${esc(x[1])}</div>`).join('');
-document.getElementById('wordGrid').innerHTML=WORDS.map(x=>`<div class="word"><b>${x[0]}</b><div class="muted">${x[1]}</div></div>`).join('');document.getElementById('stars').textContent=(D.stars||0)+' stars';
+document.getElementById('wordGrid').innerHTML=WORDS.map(x=>`<div class="word"><b>${x[0]}</b><div class="muted">${x[1]}</div></div>`).join('');if(document.getElementById('stars'))document.getElementById('stars').textContent=(D.stars||0)+' stars';
 }
 /* Pixel Bird game logic */
 let birdGame={running:false,over:false,score:0,best:Number(localStorage.getItem('pixelBirdBest')||0),y:160,vy:0,pipes:[],frame:0,raf:0};
@@ -616,7 +616,7 @@ function petAction(action){
  if(action==='feed'){pet.hunger=Math.min(100,pet.hunger+22);pet.happy=Math.min(100,pet.happy+7);m.textContent='nom nom!! CAKE!! 🍰'}
  if(action==='wash'){pet.clean=Math.min(100,pet.clean+28);pet.happy=Math.min(100,pet.happy+5);m.textContent='bubbly and sparkly now!! 🫧'}
  if(action==='sleep'){pet.energy=Math.min(100,pet.energy+32);pet.happy=Math.min(100,pet.happy+3);m.textContent='zzz... that was a good nap ♡'}
- if(action==='play'){if(pet.energy<12){m.textContent='i'm too sleepy to play... let me nap first 🌙'}else{pet.happy=Math.min(100,pet.happy+18);pet.energy=Math.max(0,pet.energy-12);pet.hunger=Math.max(0,pet.hunger-5);m.textContent='WHEEEE!! best day ever!! ✧'}}
+ if(action==='play'){if(pet.energy<12){m.textContent='I am too sleepy to play... let me nap first 🌙'}else{pet.happy=Math.min(100,pet.happy+18);pet.energy=Math.max(0,pet.energy-12);pet.hunger=Math.max(0,pet.hunger-5);m.textContent='WHEEEE!! best day ever!! ✧'}}
  petSave();petRender();
 }
 function petTick(){pet.hunger=Math.max(0,pet.hunger-1);pet.clean=Math.max(0,pet.clean-.55);pet.energy=Math.max(0,pet.energy-.45);pet.happy=Math.max(0,pet.happy-.35);petSave();petRender()}
