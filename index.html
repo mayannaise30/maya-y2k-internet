@@ -472,6 +472,22 @@ input,textarea,select{font-size:14px;line-height:1.45}
 .pong-hud{display:flex;justify-content:space-between;font:12px monospace;padding:8px 2px;color:#dcecff}
 @media(max-width:500px){.pet-actions{grid-template-columns:repeat(2,1fr)}.pet-stats{grid-template-columns:1fr 1fr}}
 
+/* Crazy Eights card table */
+.c8-table{background:linear-gradient(145deg,#dcecff,#a9c7e8);border:3px ridge #fff;padding:12px;color:#18375f}
+.c8-hud{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;background:#355987;color:white;padding:9px;font:12px monospace}
+.c8-center{display:flex;justify-content:center;align-items:center;gap:18px;min-height:145px;padding:14px;flex-wrap:wrap}
+.c8-pile{min-width:78px;text-align:center;font:11px monospace}
+.c8-card{width:58px;height:84px;border:2px solid #fff;border-radius:8px;background:linear-gradient(145deg,#fff,#e9f0fb);box-shadow:2px 3px 0 #6683a9;color:#1d3150;font:bold 23px Georgia;display:inline-flex;align-items:center;justify-content:center;position:relative}
+.c8-card.red{color:#c74465}.c8-card.back{background:repeating-linear-gradient(45deg,#4f78b7,#4f78b7 5px,#dceaff 5px,#dceaff 8px);color:white;border:3px double white}
+.c8-hand{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;padding:12px 3px;min-height:105px}
+.c8-hand button{padding:0;margin:0;background:transparent;border:0;cursor:pointer}
+.c8-hand button:disabled{opacity:.42;cursor:not-allowed}
+.c8-hand .c8-card{width:49px;height:72px;font-size:20px;transition:transform .15s}
+.c8-hand button:not(:disabled):hover .c8-card{transform:translateY(-8px)}
+.c8-actions{text-align:center;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.c8-note{text-align:center;font:12px monospace;padding:8px;background:#fff;border:1px dashed #829fc4;margin:8px 0}
+.c8-suits button{min-width:42px}
+@media(max-width:500px){.c8-hand{gap:3px}.c8-hand .c8-card{width:40px;height:62px;font-size:17px}}
 </style></head><body>
 <header><div class="brand">✦ MAYA'S MINI INTERNET ✦</div><div class="tiny">best viewed with a little sparkle · since whenever</div></header>
 <main>
@@ -554,7 +570,15 @@ input,textarea,select{font-size:14px;line-height:1.45}
 <div class="pong-wrap"><div class="pong-hud"><span>PLAYER <b id="pongPlayer">0</b></span><span>PIXEL PONG.EXE</span><span>CPU <b id="pongCpu">0</b></span></div><canvas id="pongCanvas" width="640" height="360" aria-label="Pixel Pong game"></canvas><div class="pong-hud"><span id="pongStatus">READY</span><span>FIRST TO 7 WINS</span></div></div>
 <div style="text-align:center;margin-top:9px"><button onclick="pongStart()">▶ START / RESUME</button><button onclick="pongReset()">↻ NEW GAME</button></div>
 </div>
-
+<div class="panel"><h2>♠ CRAZY EIGHTS</h2><p>A classic card game! Play against the computer: match the top card by suit or number. Eights are wild, so you can change the suit.</p>
+<div class="c8-table">
+ <div class="c8-hud"><span>YOU: <b id="c8YouCount">0</b> cards</span><span>CRAZY EIGHTS.EXE</span><span>CPU: <b id="c8CpuCount">0</b> cards</span></div>
+ <div class="c8-center"><div class="c8-pile"><div>DRAW PILE</div><button class="c8-card back" onclick="c8Draw()" aria-label="Draw a card">✦</button><div id="c8DeckCount">0 left</div></div><div class="c8-pile"><div>PLAY THIS</div><div id="c8Discard" class="c8-card">?</div><div id="c8SuitLabel">SUIT: —</div></div></div>
+ <div class="c8-note" id="c8Message">Press NEW GAME to start!</div>
+ <div class="c8-suits" id="c8SuitChoices" style="display:none;text-align:center">Choose a suit: <button onclick="c8Choose('♠')">♠</button><button onclick="c8Choose('♥')">♥</button><button onclick="c8Choose('♦')">♦</button><button onclick="c8Choose('♣')">♣</button></div>
+ <div><b style="font:12px monospace">YOUR CARDS — click one to play</b><div class="c8-hand" id="c8Hand"></div></div>
+ <div class="c8-actions"><button onclick="c8New()">▶ NEW GAME</button><button onclick="c8Draw()">＋ DRAW CARD</button><button onclick="c8Pass()">PASS TURN</button></div>
+</div></div>
 </section>
 <footer>made of daydreams, pixels & icy blue glitter ✧<br><button onclick="backup()">export my data</button><button onclick="resetSite()">reset saved site data</button><p>Your edits are saved in this browser. Photos stay local to this browser/device.</p></footer>
 </main><div id="toast"></div>
@@ -669,6 +693,25 @@ document.addEventListener('DOMContentLoaded',()=>{const c=document.getElementByI
 render();
 if(document.getElementById('petStats'))petRender();
 if(document.getElementById('pongCanvas'))pongDraw();
+/* Crazy Eights */
+const c8Suits=['♠','♥','♦','♣'],c8Ranks=['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+let c8={deck:[],hand:[],cpu:[],top:null,suit:'',turn:'you',started:false,over:false,choosing:false};
+function c8Shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a}
+function c8New(){let d=c8Shuffle(c8Suits.flatMap(s=>c8Ranks.map(r=>({s,r}))));c8={deck:d,hand:[],cpu:[],top:null,suit:'',turn:'you',started:true,over:false,choosing:false};for(let i=0;i<7;i++){c8.hand.push(c8.deck.pop());c8.cpu.push(c8.deck.pop())}c8.top=c8.deck.pop();while(c8.top.r==='8'&&c8.deck.length)c8.deck.unshift(c8.top),c8.top=c8.deck.pop();c8.suit=c8.top.s;c8Render();c8Say('Your turn! Match the suit or number. Eights can be played anytime.')}
+function c8Playable(card){return card.r==='8'||card.s===c8.suit||card.r===c8.top.r}
+function c8Red(s){return s==='♥'||s==='♦'}
+function c8CardHTML(card,back=false){return '<span class="c8-card '+(back?'back':c8Red(card.s)?'red':'')+'">'+(back?'✦':card.r+card.s)+'</span>'}
+function c8Render(){if(!document.getElementById('c8Hand'))return;document.getElementById('c8YouCount').textContent=c8.hand.length;document.getElementById('c8CpuCount').textContent=c8.cpu.length;document.getElementById('c8DeckCount').textContent=c8.deck.length+' left';document.getElementById('c8Discard').className='c8-card '+(c8Red(c8.top?.s)?'red':'');document.getElementById('c8Discard').textContent=c8.top?c8.top.r+c8.top.s:'?';document.getElementById('c8SuitLabel').textContent='SUIT: '+(c8.suit||'—');document.getElementById('c8Hand').innerHTML=c8.hand.map((card,i)=>'<button '+(c8.turn!=='you'||c8.over||c8.choosing||!c8Playable(card)?'disabled':'')+' onclick="c8Play('+i+')">'+c8CardHTML(card)+'</button>').join('');document.getElementById('c8SuitChoices').style.display=c8.choosing?'block':'none'}
+function c8Say(t){document.getElementById('c8Message').textContent=t}
+function c8Recycle(){if(c8.deck.length||!c8.top)return;let old=c8.top;c8.deck=c8Shuffle(c8DiscardStack||[]);c8DiscardStack=[];c8.top=old}
+let c8DiscardStack=[];
+function c8Take(){if(!c8.deck.length&&c8DiscardStack.length){c8.deck=c8Shuffle(c8DiscardStack);c8DiscardStack=[]}return c8.deck.pop()||null}
+function c8Draw(){if(!c8.started||c8.over||c8.turn!=='you'||c8.choosing)return;let card=c8Take();if(!card){c8Say('No cards left to draw. Try PASS TURN.');return}c8.hand.push(card);c8Render();if(c8Playable(card))c8Say('You drew '+card.r+card.s+'. You can play it or pass.');else{c8Say('You drew '+card.r+card.s+'. No match — pass your turn.');} }
+function c8Play(i){if(!c8.started||c8.over||c8.turn!=='you'||c8.choosing)return;let card=c8.hand[i];if(!c8Playable(card))return;c8.hand.splice(i,1);c8DiscardStack.push(c8.top);c8.top=card;if(card.r==='8'){c8.choosing=true;c8Render();c8Say('Wild card! Choose the next suit.');return}c8AfterPlay('you')}
+function c8Choose(s){if(!c8.choosing)return;c8.suit=s;c8.choosing=false;c8AfterPlay('you')}
+function c8AfterPlay(who){if(c8.hand.length===0&&who==='you'){c8.over=true;c8Render();c8Say('YOU WIN!! ✨ You got rid of every card!');return}if(c8.cpu.length===0&&who==='cpu'){c8.over=true;c8Render();c8Say('CPU wins this round — play again?');return}if(who==='you'){c8.turn='cpu';c8Render();setTimeout(c8CpuTurn,650)}else{c8.turn='you';c8Render();c8Say('Your turn! Match '+c8.suit+' or '+c8.top.r+'.')}}
+function c8Pass(){if(!c8.started||c8.over||c8.turn!=='you'||c8.choosing)return;c8.turn='cpu';c8Render();c8Say('You passed. CPU turn...');setTimeout(c8CpuTurn,500)}
+function c8CpuTurn(){if(c8.over)return;let i=c8.cpu.findIndex(c=>c8Playable(c));if(i<0){let c=c8Take();if(c){c8.cpu.push(c);if(c8Playable(c))i=c8.cpu.length-1}}if(i>=0){let card=c8.cpu.splice(i,1)[0];c8DiscardStack.push(c8.top);c8.top=card;if(card.r==='8'){let counts={};c8.cpu.forEach(c=>counts[c.s]=(counts[c.s]||0)+1);c8.suit=Object.keys(counts).sort((a,b)=>(counts[b]||0)-(counts[a]||0))[0]||c8Suits[Math.random()*4|0]}else c8.suit=card.s;c8Say('CPU played '+card.r+card.s+(card.r==='8'?' and changed suit to '+c8.suit+'.':'.'))}else c8Say('CPU has no match and passes.');c8AfterPlay('cpu')}
 </script>
 <script>
 /* Reliable click fallback: route the site's existing inline actions explicitly. */
