@@ -478,6 +478,25 @@ input,textarea,select{font-size:14px;line-height:1.45}
 .pong-hud{display:flex;justify-content:space-between;font:12px monospace;padding:8px 2px;color:#dcecff}
 @media(max-width:500px){.pet-actions{grid-template-columns:repeat(2,1fr)}.pet-stats{grid-template-columns:1fr 1fr}}
 
+
+/* New Y2K arcade games */
+.new-game-shell{border:3px ridge #fff;background:linear-gradient(145deg,#eaf3ff,#cbdcf0);padding:12px;color:#263c59}
+.new-game-top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;background:#536f9b;color:#fff;padding:8px 10px;font:11px monospace}
+.dress-stage{min-height:245px;display:grid;place-items:center;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 30%,#fff 0 3px,transparent 4px),linear-gradient(145deg,#e6efff,#c3d7f0);background-size:22px 22px,auto;border:2px inset white;margin:10px 0}
+.dress-doll{font-size:clamp(62px,12vw,90px);text-align:center;line-height:1.25;filter:drop-shadow(0 5px 2px #536f9b44)}
+.dress-doll .dress-face{font-size:58px}.dress-label{font:11px monospace;background:#fff;padding:5px 9px;border:1px solid #aabdd8;margin-top:7px}
+.dress-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.dress-option{background:#fff;border:1px solid #b8c9df;padding:8px;text-align:center;font-size:12px}
+.dress-option b{display:block;color:#526f9a;font:11px monospace;margin-bottom:4px}
+.mole-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;max-width:420px;margin:12px auto}
+.mole-hole{aspect-ratio:1;border:2px ridge white;background:radial-gradient(ellipse,#8d9fba 0 35%,#dce8f6 37% 58%,#a8bfdc 60%);font-size:clamp(28px,6vw,43px);display:grid;place-items:center;touch-action:manipulation}
+.mole-hole:active{transform:scale(.96)}
+.mole-hud,.snake-hud{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;background:#536f9b;color:#fff;padding:8px 10px;font:11px monospace}
+#snakeCanvas{display:block;width:100%;max-width:480px;height:auto;margin:10px auto;background:#172b49;border:3px ridge white;image-rendering:pixelated;touch-action:manipulation}
+.snake-controls{display:grid;grid-template-columns:repeat(3,52px);gap:4px;justify-content:center;margin:8px auto}
+.snake-controls button{margin:0;min-height:40px}
+@media(max-width:480px){.dress-controls{grid-template-columns:1fr 1fr}.new-game-shell{padding:8px}.mole-grid{gap:5px}}
+
 /* Crazy Eights computer opponent */
 .c8-opponent{background:#edf6ffb8;border:1px dashed #789bc3;border-radius:12px;padding:9px;margin:8px 0;text-align:center}.c8-opponent-label{font:11px monospace;font-weight:bold;color:#294d79;display:flex;justify-content:space-between;gap:8px}.c8-opponent-cards{display:flex;justify-content:center;gap:4px;flex-wrap:wrap;padding:8px 0 2px}.c8-opponent-cards .c8-card{width:30px;height:43px;font-size:14px;border-radius:5px}
 /* Crazy Eights card table */
@@ -579,6 +598,32 @@ input,textarea,select{font-size:14px;line-height:1.45}
 <div class="pong-wrap"><div class="pong-hud"><span>PLAYER <b id="pongPlayer">0</b></span><span>PIXEL PONG.EXE</span><span>CPU <b id="pongCpu">0</b></span></div><canvas id="pongCanvas" width="640" height="360" aria-label="Pixel Pong game"></canvas><div class="pong-hud"><span id="pongStatus">READY</span><span>FIRST TO 7 WINS</span></div></div>
 <div style="text-align:center;margin-top:9px"><button onclick="pongStart()">▶ START / RESUME</button><button onclick="pongReset()">↻ NEW GAME</button></div>
 </div>
+
+<div class="panel"><h2>♡ Y2K DRESS-UP STUDIO</h2><p>Style your own little 2000s icon! Tap the buttons to switch hairstyles, outfits, shoes, and accessories.</p>
+ <div class="new-game-shell"><div class="new-game-top"><span>FASHION.exe</span><span>✧ YOUR STYLE, YOUR RULES ✧</span></div>
+  <div class="dress-stage"><div><div class="dress-doll" id="dressDoll">👩🏻‍🎤<div id="dressOutfit">👚</div><div id="dressShoes">👢</div><div id="dressAccessory">🕶️</div></div><div class="dress-label" id="dressCaption">Y2K IT GIRL ✦</div></div></div>
+  <div class="dress-controls">
+   <div class="dress-option"><b>HAIR / LOOK</b><span id="dressHairName">Pop star</span><br><button onclick="dressCycle('hair',-1)">◀</button><button onclick="dressCycle('hair',1)">▶</button></div>
+   <div class="dress-option"><b>OUTFIT</b><span id="dressOutfitName">Baby tee</span><br><button onclick="dressCycle('outfit',-1)">◀</button><button onclick="dressCycle('outfit',1)">▶</button></div>
+   <div class="dress-option"><b>SHOES</b><span id="dressShoesName">Platform boots</span><br><button onclick="dressCycle('shoes',-1)">◀</button><button onclick="dressCycle('shoes',1)">▶</button></div>
+   <div class="dress-option"><b>ACCESSORY</b><span id="dressAccessoryName">Shades</span><br><button onclick="dressCycle('accessory',-1)">◀</button><button onclick="dressCycle('accessory',1)">▶</button></div>
+  </div><div style="text-align:center;margin-top:9px"><button onclick="dressRandom()">✧ RANDOM LOOK</button><button onclick="dressReset()">↻ RESET STYLE</button></div>
+ </div></div>
+<div class="panel"><h2>🔨 WHACK-A-MOLE</h2><p>Tap the mole whenever it pops up! You have 30 seconds to get as many points as you can.</p>
+ <div class="new-game-shell"><div class="new-game-top"><span>MOLE POP.EXE</span><span>30 SECOND CHALLENGE</span></div>
+  <div class="mole-hud"><span>TIME: <b id="moleTime">30</b>s</span><span>SCORE: <b id="moleScore">0</b></span><span>BEST: <b id="moleBest">0</b></span></div>
+  <div class="mole-grid" id="moleGrid"><button class="mole-hole" id="mole0" onclick="moleHit(0)" aria-label="Mole hole 1">·</button><button class="mole-hole" id="mole1" onclick="moleHit(1)" aria-label="Mole hole 2">·</button><button class="mole-hole" id="mole2" onclick="moleHit(2)" aria-label="Mole hole 3">·</button><button class="mole-hole" id="mole3" onclick="moleHit(3)" aria-label="Mole hole 4">·</button><button class="mole-hole" id="mole4" onclick="moleHit(4)" aria-label="Mole hole 5">·</button><button class="mole-hole" id="mole5" onclick="moleHit(5)" aria-label="Mole hole 6">·</button><button class="mole-hole" id="mole6" onclick="moleHit(6)" aria-label="Mole hole 7">·</button><button class="mole-hole" id="mole7" onclick="moleHit(7)" aria-label="Mole hole 8">·</button><button class="mole-hole" id="mole8" onclick="moleHit(8)" aria-label="Mole hole 9">·</button></div>
+  <div class="mole-hud"><span id="moleStatus">READY TO PLAY</span><span>✦ TAP THE MOLE ✦</span></div>
+  <div style="text-align:center;margin-top:9px"><button onclick="moleStart()">▶ START</button><button onclick="moleReset()">↻ RESET</button></div>
+ </div></div>
+<div class="panel"><h2>🐍 SNAKE</h2><p>Collect the little stars, grow longer, and don't bump into the walls or yourself. Use arrow keys, WASD, or the touch controls.</p>
+ <div class="new-game-shell"><div class="new-game-top"><span>SNAKE.exe</span><span>PIXEL ARCADE CLASSIC</span></div>
+  <div class="snake-hud"><span>SCORE: <b id="snakeScore">0</b></span><span>BEST: <b id="snakeBest">0</b></span><span id="snakeStatus">READY</span></div>
+  <canvas id="snakeCanvas" width="480" height="360" aria-label="Snake game board"></canvas>
+  <div class="snake-controls"><span></span><button onclick="snakeTurn('up')">▲</button><span></span><button onclick="snakeTurn('left')">◀</button><button onclick="snakeTurn('down')">▼</button><button onclick="snakeTurn('right')">▶</button></div>
+  <div style="text-align:center"><button onclick="snakeStart()">▶ START / RESUME</button><button onclick="snakeReset()">↻ NEW GAME</button></div>
+ </div></div>
+
 <div class="panel"><h2>♠ CRAZY EIGHTS</h2><p>A classic card game! Play against the computer: match the top card by suit or number. Eights are wild, so you can change the suit.</p>
 <div class="c8-table">
  <div class="c8-hud"><span>YOU: <b id="c8YouCount">0</b> cards</span><span>CRAZY EIGHTS.EXE</span><span>CPU: <b id="c8CpuCount">0</b> cards</span></div>
@@ -757,6 +802,38 @@ function c8Choose(s){if(!c8.choosing)return;c8.suit=s;c8.choosing=false;c8AfterP
 function c8AfterPlay(who){if(c8.hand.length===0&&who==='you'){c8.over=true;c8Render();c8Say('YOU WIN!! ✨ You got rid of every card!');return}if(c8.cpu.length===0&&who==='cpu'){c8.over=true;c8Render();c8Say('CPU wins this round — play again?');return}if(who==='you'){c8.turn='cpu';c8Render();setTimeout(c8CpuTurn,650)}else{c8.turn='you';c8Render();c8Say('Your turn! Match '+c8.suit+' or '+c8.top.r+'.')}}
 function c8Pass(){if(!c8.started||c8.over||c8.turn!=='you'||c8.choosing)return;c8.turn='cpu';c8Render();c8Say('You passed. CPU turn...');setTimeout(c8CpuTurn,500)}
 function c8CpuTurn(){if(c8.over)return;let i=c8.cpu.findIndex(c=>c8Playable(c));if(i<0){let c=c8Take();if(c){c8.cpu.push(c);if(c8Playable(c))i=c8.cpu.length-1}}if(i>=0){let card=c8.cpu.splice(i,1)[0];c8DiscardStack.push(c8.top);c8.top=card;if(card.r==='8'){let counts={};c8.cpu.forEach(c=>counts[c.s]=(counts[c.s]||0)+1);c8.suit=Object.keys(counts).sort((a,b)=>(counts[b]||0)-(counts[a]||0))[0]||c8Suits[Math.random()*4|0]}else c8.suit=card.s;c8Say('CPU played '+card.r+card.s+(card.r==='8'?' and changed suit to '+c8.suit+'.':'.'))}else c8Say('CPU has no match and passes.');c8AfterPlay('cpu')}
+
+/* Y2K dress-up */
+const dressSets={hair:[['👩🏻‍🎤','Pop star'],['👩🏽‍🦱','Curly cutie'],['👱🏻‍♀️','Blonde bombshell'],['👩🏾‍🦰','Copper glam'],['👩🏻','Sleek style']],outfit:[['👚','Baby tee'],['👗','Party dress'],['🧥','Denim jacket'],['👕','Graphic tee'],['🩱','Pink pop look']],shoes:[['👢','Platform boots'],['👟','Chunky sneakers'],['👠','Glam heels'],['🥿','Cute flats']],accessory:[['🕶️','Shades'],['💿','CD bag'],['🎀','Big bow'],['💎','Bling'],['👜','Mini purse']]};
+let dressState={hair:0,outfit:0,shoes:0,accessory:0};
+function dressRender(){for(const k of Object.keys(dressSets)){const item=dressSets[k][dressState[k]],name=document.getElementById('dress'+k[0].toUpperCase()+k.slice(1)+'Name');if(name)name.textContent=item[1];const target=document.getElementById('dress'+k[0].toUpperCase()+k.slice(1));if(target)target.textContent=item[0]}document.getElementById('dressCaption').textContent=dressSets.hair[dressState.hair][1].toUpperCase()+' ✦ '+dressSets.outfit[dressState.outfit][1].toUpperCase()}
+function dressCycle(k,dir){dressState[k]=(dressState[k]+dir+dressSets[k].length)%dressSets[k].length;dressRender()}
+function dressRandom(){Object.keys(dressSets).forEach(k=>dressState[k]=Math.random()*dressSets[k].length|0);dressRender()}
+function dressReset(){Object.keys(dressState).forEach(k=>dressState[k]=0);dressRender()}
+dressRender();
+
+/* Whack-a-mole */
+let mole={score:0,time:30,active:-1,playing:false,timer:0,pop:0,best:Number(localStorage.getItem('moleBest')||0)};
+function moleRender(){document.getElementById('moleScore').textContent=mole.score;document.getElementById('moleTime').textContent=mole.time;document.getElementById('moleBest').textContent=mole.best;for(let i=0;i<9;i++){const b=document.getElementById('mole'+i);b.textContent=i===mole.active?'🐹':'·';b.setAttribute('aria-label',i===mole.active?'Whack the mole':'Empty mole hole')}}
+function molePop(){mole.active=Math.random()*9|0;moleRender()}
+function moleHit(i){if(!mole.playing||i!==mole.active)return;mole.score++;mole.active=-1;moleRender();molePop()}
+function moleStop(){mole.playing=false;clearInterval(mole.timer);clearInterval(mole.pop);mole.active=-1;if(mole.score>mole.best){mole.best=mole.score;localStorage.setItem('moleBest',mole.best)}document.getElementById('moleStatus').textContent='TIME UP! FINAL SCORE: '+mole.score;moleRender()}
+function moleStart(){if(mole.playing)return;moleReset();mole.playing=true;document.getElementById('moleStatus').textContent='GO GO GO!';molePop();mole.timer=setInterval(()=>{mole.time--;moleRender();if(mole.time<=0)moleStop()},1000);mole.pop=setInterval(molePop,720)}
+function moleReset(){clearInterval(mole.timer);clearInterval(mole.pop);mole.playing=false;mole.score=0;mole.time=30;mole.active=-1;document.getElementById('moleStatus').textContent='READY TO PLAY';moleRender()}
+moleRender();
+
+/* Snake */
+let snake={body:[{x:10,y:9},{x:9,y:9},{x:8,y:9}],dir:'right',next:'right',food:{x:15,y:9},score:0,playing:false,over:false,timer:0,best:Number(localStorage.getItem('snakeBest')||0)};
+function snakeFood(){let p;do{p={x:Math.random()*24|0,y:Math.random()*18|0}}while(snake.body.some(s=>s.x===p.x&&s.y===p.y));snake.food=p}
+function snakeDraw(){const c=document.getElementById('snakeCanvas');if(!c)return;const x=c.getContext('2d');x.fillStyle='#172b49';x.fillRect(0,0,480,360);x.strokeStyle='#294367';for(let i=0;i<=24;i++){x.beginPath();x.moveTo(i*20,0);x.lineTo(i*20,360);x.stroke()}for(let i=0;i<=18;i++){x.beginPath();x.moveTo(0,i*20);x.lineTo(480,i*20);x.stroke()}x.fillStyle='#f0cf65';x.fillRect(snake.food.x*20+3,snake.food.y*20+3,14,14);snake.body.forEach((p,i)=>{x.fillStyle=i===0?'#d6df84':'#8fb1d9';x.fillRect(p.x*20+2,p.y*20+2,16,16)});if(!snake.playing){x.fillStyle='#fff';x.textAlign='center';x.font='bold 19px Arial';x.fillText(snake.over?'GAME OVER':'SNAKE',240,160);x.font='12px Arial';x.fillText(snake.over?'Press NEW GAME to try again':'Press START to play',240,184)}}
+function snakeHud(){document.getElementById('snakeScore').textContent=snake.score;document.getElementById('snakeBest').textContent=snake.best;document.getElementById('snakeStatus').textContent=snake.over?'GAME OVER':snake.playing?'PLAYING':'READY'}
+function snakeReset(){clearInterval(snake.timer);snake={...snake,body:[{x:10,y:9},{x:9,y:9},{x:8,y:9}],dir:'right',next:'right',food:{x:15,y:9},score:0,playing:false,over:false,timer:0};snakeHud();snakeDraw()}
+function snakeStart(){if(snake.playing)return;if(snake.over)snakeReset();snake.playing=true;snakeHud();snakeDraw();snake.timer=setInterval(snakeStep,125)}
+function snakeTurn(d){const opposite={up:'down',down:'up',left:'right',right:'left'};if(opposite[d]!==snake.dir)snake.next=d}
+function snakeStep(){if(!snake.playing)return;snake.dir=snake.next;const head={...snake.body[0]};if(snake.dir==='up')head.y--;if(snake.dir==='down')head.y++;if(snake.dir==='left')head.x--;if(snake.dir==='right')head.x++;const eating=head.x===snake.food.x&&head.y===snake.food.y;const check= eating?snake.body:snake.body.slice(0,-1);if(head.x<0||head.x>=24||head.y<0||head.y>=18||check.some(p=>p.x===head.x&&p.y===head.y)){snake.playing=false;snake.over=true;clearInterval(snake.timer);if(snake.score>snake.best){snake.best=snake.score;localStorage.setItem('snakeBest',snake.best)}snakeHud();snakeDraw();return}snake.body.unshift(head);if(eating){snake.score++;snakeFood()}else snake.body.pop();snakeHud();snakeDraw()}
+document.addEventListener('keydown',e=>{if(!document.getElementById('games')?.classList.contains('active'))return;const map={ArrowUp:'up',w:'up',ArrowDown:'down',s:'down',ArrowLeft:'left',a:'left',ArrowRight:'right',d:'right'};const d=map[e.key];if(d){e.preventDefault();snakeTurn(d)}});
+snakeHud();snakeDraw();
+
 </script>
 <script>
 /* Reliable click fallback: route the site's existing inline actions explicitly. */
