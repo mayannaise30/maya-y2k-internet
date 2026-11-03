@@ -489,7 +489,7 @@ input,textarea,select{font-size:14px;line-height:1.45}
 .c8-card.red{color:#c74465}.c8-card.back{background:repeating-linear-gradient(45deg,#4f78b7,#4f78b7 5px,#dceaff 5px,#dceaff 8px);color:white;border:3px double white}
 .c8-hand{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;padding:12px 3px;min-height:105px}
 .c8-hand button{padding:0;margin:0;background:transparent;border:0;cursor:pointer}
-.c8-hand button:disabled{opacity:.42;cursor:not-allowed}
+.c8-hand button:disabled{opacity:.72;cursor:not-allowed}
 .c8-hand .c8-card{width:49px;height:72px;font-size:20px;transition:transform .15s}
 .c8-hand button:not(:disabled):hover .c8-card{transform:translateY(-8px)}
 .c8-actions{text-align:center;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
@@ -746,7 +746,7 @@ function c8New(){let d=c8Shuffle(c8Suits.flatMap(s=>c8Ranks.map(r=>({s,r}))));c8
 function c8Playable(card){return card.r==='8'||card.s===c8.suit||card.r===c8.top.r}
 function c8Red(s){return s==='♥'||s==='♦'}
 function c8CardHTML(card,back=false){return '<span class="c8-card '+(back?'back':c8Red(card.s)?'red':'')+'">'+(back?'✦':card.r+card.s)+'</span>'}
-function c8Render(){if(!document.getElementById('c8Hand'))return;document.getElementById('c8YouCount').textContent=c8.hand.length;document.getElementById('c8CpuCount').textContent=c8.cpu.length;document.getElementById('c8DeckCount').textContent=c8.deck.length+' left';document.getElementById('c8CpuHand').innerHTML=c8.cpu.map(()=>c8CardHTML(null,true)).join('');document.getElementById('c8CpuStatus').textContent=!c8.started?'waiting...':c8.over?'round over':c8.turn==='cpu'?'thinking...':'your turn';document.getElementById('c8Discard').className='c8-card '+(c8Red(c8.top?.s)?'red':'');document.getElementById('c8Discard').textContent=c8.top?c8.top.r+c8.top.s:'?';document.getElementById('c8SuitLabel').textContent='SUIT: '+(c8.suit||'—');document.getElementById('c8Hand').innerHTML=c8.hand.map((card,i)=>'<button '+(c8.turn!=='you'||c8.over||c8.choosing||!c8Playable(card)?'disabled':'')+' onclick="c8Play('+i+')">'+c8CardHTML(card)+'</button>').join('');document.getElementById('c8SuitChoices').style.display=c8.choosing?'block':'none'}
+function c8Render(){if(!document.getElementById('c8Hand'))return;document.getElementById('c8YouCount').textContent=c8.hand.length;document.getElementById('c8CpuCount').textContent=c8.cpu.length;document.getElementById('c8DeckCount').textContent=c8.deck.length+' left';document.getElementById('c8CpuHand').innerHTML=c8.cpu.map(()=>c8CardHTML(null,true)).join('');document.getElementById('c8CpuStatus').textContent=!c8.started?'waiting...':c8.over?'round over':c8.turn==='cpu'?'thinking...':'your turn';document.getElementById('c8Discard').className='c8-card '+(c8Red(c8.top?.s)?'red':'');document.getElementById('c8Discard').textContent=c8.top?c8.top.r+c8.top.s:'?';document.getElementById('c8SuitLabel').textContent='SUIT: '+(c8.suit||'—');document.getElementById('c8Hand').innerHTML=c8.hand.map((card,i)=>'<button '+(c8.turn!=='you'||c8.over||c8.choosing?'disabled':'')+' onclick="c8Play('+i+')">'+c8CardHTML(card)+'</button>').join('');document.getElementById('c8SuitChoices').style.display=c8.choosing?'block':'none'}
 function c8Say(t){document.getElementById('c8Message').textContent=t}
 function c8Recycle(){if(c8.deck.length||!c8.top)return;let old=c8.top;c8.deck=c8Shuffle(c8DiscardStack||[]);c8DiscardStack=[];c8.top=old}
 let c8DiscardStack=[];
